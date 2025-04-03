@@ -1,13 +1,13 @@
-# **GRUPO X:** Título do Jogo
+# **GRUPO G:** Templus Fugit
 Trabalho de Desenvolvimento de Jogos apresentado ao Centro Universitário [FEI](https://portal.fei.edu.br/), como parte dos requisitos necessários para aprovação na disciplina de Desenvolvimento de Jogos Digitais (CC7140) do curso de Ciência da Computação, orientado pelo Prof. Dr. [Fagner de Assis Moura Pimentel](https://github.com/fagnerpimentel).
 
 ## Componentes do Grupo
 
-- Nome Componente 1
+- Lucas Rezende Simões
 - Nome Componente 2
-- Nome Componente 3
-- Nome Componente 4
-- Nome Componente 5
+- Ruan Pastrelo Turola
+- Adriel Henrique Foppa Lima
+- Igor Augusto Fiorini Rossi
 
 ## Tópicos
 - [Introdução](./docs/1-introducao.md)
