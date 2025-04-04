@@ -1,4 +1,4 @@
-### Estética
+## Estética
 
 - Personagens 
     - Quais os personagens que farão parte do jogo?
@@ -22,36 +22,74 @@
     - Quais os sentidos dos jogadores você gostaria de explorar no seu jogo?
     - O jogo vai ter elementos visuais, sonoros, táteis, degustativos, olfativos?
         - Como esses elementos são apresentados para o jogador?
-## Personagens
 
-### Personagens Principais
+### Personagens
 
-1. **Suzan** (Protagonista): Uma jovem arqueóloga especializada em civilizações antigas e artefatos místicos. Inteligente e determinada, Suzan entra no Templo de Cronos buscando provar suas teorias sobre manipulação temporal dos antigos. Sua curiosidade acadêmica a coloca em perigo quando ativa acidentalmente o mecanismo que a prende no ciclo temporal.
-     - Plano de Fundo: Filha de um relojoeiro e uma historiadora, cresceu fascinada pela interseção entre tempo e história. Sua carreira acadêmica foi marcada por teorias controversas sobre civilizações antigas que teriam dominado tecnologias temporais.
-     - Características Importantes: Agilidade mental para resolver puzzles sob pressão, capacidade de adaptação rápida, e uma determinação inabalável mesmo após repetidos fracassos.
+**Protagonista:**
+- **Suzan**  
+  Suzan é uma jovem arqueóloga determinada, inteligente e curiosa. Ao explorar as ruínas do lendário **Templo de Cronos**, ela acidentalmente ativa um mecanismo temporal que a prende em um ciclo infinito. Sua motivação é escapar do templo e compreender os segredos do tempo.  
+  **Características principais:**  
+  - Aparência prática (roupas de exploração, mochila, ferramentas arqueológicas)  
+  - Expressões faciais fortes para transmitir urgência e persistência  
+  - Postura ágil e determinada  
+  - Evolução visual conforme adquire artefatos temporais (roupa brilha, elementos místicos são incorporados)
 
-2. **Cronos** (Antagonista Principal): A entidade do tempo que controla o templo. Não se manifesta como uma figura física constante, mas através de diferentes avatares e manifestações ao longo do jogo.
+**Antagonista:**
+- **Entidade Cronos**  
+  Representa a personificação do próprio tempo. Não aparece diretamente no início, mas suas manifestações são vistas em forma de armadilhas, distorções temporais e bosses corrompidos.  
+  - Elemento misterioso e imponente  
+  - Voz distorcida, presença simbólica em totens e estátuas  
+  - Final boss possível, dependendo do caminho do jogador  
 
-    - Plano de Fundo: Uma divindade antiga que foi aprisionada no templo há milênios e agora testa aqueles que entram, buscando um sucessor digno.
-    - Características Importantes: Presença imponente e etérea, capacidade de manipular todos os aspectos do tempo, personalidade enigmática que oscila entre testar e auxiliar Suzan.
+**NPCs (Personagens Não Jogáveis):**
+- **Comerciantes temporais**  
+  Criaturas que habitam as fissuras do tempo. Alguns vendem artefatos em troca de fragmentos temporais; outros oferecem upgrades ou informações enigmáticas.  
+  - Estética excêntrica, com aparência distorcida pelo tempo  
+  - Diálogos enigmáticos que revelam partes da história do templo  
+  - Exemplo: “O Quebra-Ciclo”, um mercador que oferece artefatos que "restringem" o tempo.
 
+---
 
+### História
 
-Personagens Não Jogáveis (NPCs)
+**Premissa:**
+O jogo se passa nas profundezas do **Templo de Cronos**, um santuário antigo construído por uma civilização que tentava dominar o tempo. Ao ser ativado, o templo isola qualquer intruso dentro de um ciclo temporal, onde tempo, espaço e realidade se distorcem. Antes do jogador assumir o controle, é revelado que Suzan está em busca de um artefato lendário, acreditando ser uma descoberta arqueológica comum.
 
-Guardião do Portal: Um viajante misterioso preso no templo há décadas, que agora administra a loja principal. Oferece itens e dicas em troca de moedas temporais.
+**Início do jogo:**
+O jogador começa com uma cutscene mostrando Suzan entrando no templo, ativando o mecanismo central e sendo envolvida por uma luz intensa. Logo após, o jogador desperta na primeira sala, com pouca informação, e começa a explorar.
 
-Plano de Fundo: Foi um explorador que, como Suzan, ficou preso no ciclo temporal, mas encontrou uma forma de existir como comerciante entre os ciclos.
-Características Importantes: Conhecimento profundo sobre o templo, humor seco, aspecto envelhecido mas com olhos que parecem conter séculos de sabedoria.
+**Evolução:**
+- Ao longo do jogo, Suzan encontra **artefatos temporais** que desbloqueiam **novas habilidades**:
+  - Desacelerar o tempo (bullet time)
+  - Voltar no tempo (retroceder ações)
+  - Clonagem temporal (duplicar uma ação passada por alguns segundos)
+- Os **desafios evoluem** com inimigos mais rápidos, puzzles mais complexos e bosses com fases múltiplas.
 
+**Finais possíveis:**
+- **Final Libertação:** Suzan encontra o artefato central e quebra o ciclo temporal.
+- **Final Prisão:** Suzan falha em escapar e se torna parte do templo, substituindo um dos NPCs.
+- **Final Paradoxo:** Suzan manipula o tempo ao ponto de se tornar a nova entidade Cronos.
 
-Ecos Temporais: Fragmentos de exploradores anteriores que aparecem como holograma ou sombras luminosas, fornecendo pistas ou avisos sobre armadilhas próximas.
+---
 
-Plano de Fundo: Resquícios de pessoas que tentaram escapar do templo e deixaram fragmentos de si mesmos como avisos.
-Características Importantes: Aparência etérea, comunicação fragmentada e confusa, gestos dramáticos que indicam perigos.
+### Sentidos
 
+**Sentidos explorados:**
 
-Oráculo do Tempo: Uma entidade neutra que aparece em momentos específicos para testar o conhecimento de Suzan e oferecer escolhas importantes que afetam o rumo da história.
+- **Visual:**  
+  - Estilo artístico 2D com arte pixelada detalhada  
+  - Paleta de cores dinâmica que muda conforme o tempo passa (manhã, tarde, noite, distorções temporais)  
+  - Efeitos visuais nas habilidades (ex: distorções, ecos temporais, brilho de artefatos)
 
-Plano de Fundo: Um servo direto de Cronos, encarregado de avaliar os visitantes do templo.
-Características Importantes: Aparência mutável que reflete diferentes idades da mesma pessoa, voz ressonante, capacidade de mostrar possíveis futuros.
+- **Sonoro:**  
+  - Trilha sonora atmosférica, com variações que acompanham a tensão e evolução do ciclo  
+  - Sons ambientes (engrenagens, ecos, distorções temporais, sussurros)  
+  - Feedback sonoro claro para ações (ataques, acertos, uso de habilidades)
+
+- **Tátil (caso usado com controle com vibração):**  
+  - Vibração leve ao ativar habilidades temporais  
+  - Vibrações intensas em momentos de perigo (chefes, armadilhas ativadas)
+
+**Obs:** Não há estímulos táteis diretos no teclado/mouse, nem degustativos/olfativos por se tratar de um jogo digital comum.
+
+---
