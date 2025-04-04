@@ -32,11 +32,10 @@
   - Aparência prática (roupas de exploração, mochila, ferramentas arqueológicas)  
   - Expressões faciais fortes para transmitir urgência e persistência  
   - Postura ágil e determinada  
-  - Evolução visual conforme adquire artefatos temporais (roupa brilha, elementos místicos são incorporados)
 
 **Antagonista:**
 - **Entidade Cronos**  
-  Representa a personificação do próprio tempo. Não aparece diretamente no início, mas suas manifestações são vistas em forma de armadilhas, distorções temporais e bosses corrompidos.  
+  Representa a personificação do próprio tempo. Não aparece diretamente no início, mas suas manifestações são vistas em forma de armadilhas, distorções temporais e inimigos corrompidos.  
   - Elemento misterioso e imponente  
   - Voz distorcida, presença simbólica em totens e estátuas  
   - Final boss possível, dependendo do caminho do jogador  
@@ -56,14 +55,14 @@
 O jogo se passa nas profundezas do **Templo de Cronos**, um santuário antigo construído por uma civilização que tentava dominar o tempo. Ao ser ativado, o templo isola qualquer intruso dentro de um ciclo temporal, onde tempo, espaço e realidade se distorcem. Antes do jogador assumir o controle, é revelado que Suzan está em busca de um artefato lendário, acreditando ser uma descoberta arqueológica comum.
 
 **Início do jogo:**
-O jogador começa com uma cutscene mostrando Suzan entrando no templo, ativando o mecanismo central e sendo envolvida por uma luz intensa. Logo após, o jogador desperta na primeira sala, com pouca informação, e começa a explorar.
+O jogador começa com Suzan entrando no templo, ativando o mecanismo central e sendo envolvida por uma luz intensa. Logo após, o jogador desperta na primeira sala, com pouca informação, e começa a explorar.
 
 **Evolução:**
 - Ao longo do jogo, Suzan encontra **artefatos temporais** que desbloqueiam **novas habilidades**:
   - Desacelerar o tempo (bullet time)
   - Voltar no tempo (retroceder ações)
   - Clonagem temporal (duplicar uma ação passada por alguns segundos)
-- Os **desafios evoluem** com inimigos mais rápidos, puzzles mais complexos e bosses com fases múltiplas.
+- Os **desafios evoluem** com inimigos mais rápidos, puzzles mais complexos e inimigos com fases múltiplas.
 
 **Finais possíveis:**
 - **Final Libertação:** Suzan encontra o artefato central e quebra o ciclo temporal.
