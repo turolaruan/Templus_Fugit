@@ -4,7 +4,6 @@ Trabalho de Desenvolvimento de Jogos apresentado ao Centro Universitário [FEI](
 ## Componentes do Grupo
 
 - Lucas Rezende Simões
-- Nome Componente 2
 - Ruan Pastrelo Turola
 - Adriel Henrique Foppa Lima
 - Igor Augusto Fiorini Rossi
