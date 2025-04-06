@@ -1,7 +1,3 @@
-## Introdução
-- Qual a ideia principal do seu jogo? 
-- Que tipo de experiência você quer dar para o seu jogador?
-
 O presente projeto tem como objetivo o desenvolvimento do jogo digital *Templus Fugit* é um jogo digital 2D no estilo **roguelike de ação e aventura**, cuja ideia principal gira em torno da **exploração de um templo antigo onde o tempo é ao mesmo tempo inimigo, aliado e mistério**. O jogador vivencia a história de **Suzan**, uma jovem arqueóloga que ativa acidentalmente um mecanismo ancestral e se vê presa em um **ciclo temporal infinito** dentro do lendário **Templo de Cronos**.
 
 O jogo propõe uma experiência **imersiva e desafiadora**, onde o jogador deve lidar com **inimigos corrompidos pelo tempo**, **armadilhas dinâmicas**, **puzzles ambientais** e **mecânicas de manipulação temporal**, como retrocesso, desaceleração e clonagem temporal. Cada tentativa de escapar do templo reconfigura o ambiente, garantindo partidas únicas baseadas em tentativa e erro — elemento característico do gênero roguelike.
