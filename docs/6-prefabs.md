@@ -188,3 +188,15 @@
   - **Fonte de Áudio:** `chest_open.mp3`
   - **Scripts:**
     - `ChestController.cs`: desafio para abrir o baú, sorteia recompensa.
+
+### Moeda
+
+- **Descrição:** Item colecionável utilizado como forma de pagamento na loja do templo.
+- **Quando é utilizada:** Coletada durante a exploração do jogo; pode ser gasta com o vendedor para adquirir itens mágicos.
+- **Componentes:**
+  - **Sprite:** `moeda.png`  
+    ![moeda](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/moeda.jpg)
+  - **Colisor:** `None`
+  - **Fonte de Áudio:** `None`
+  - **Scripts:**
+    - `CoinPickup.cs`: adiciona moeda ao inventário.
