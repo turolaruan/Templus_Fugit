@@ -22,6 +22,9 @@
 ### Baús
   ![baus](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/prototipo_bau.jpg)
 
+### Moedas
+  ![baus](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/prototipo_moedas.jpg)
+
 ### Teclas a serem apertadas
   ![teclas](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/prototipo_teclas_a_serem_apertadas.jpg)
 
