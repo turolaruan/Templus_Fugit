@@ -1,7 +1,4 @@
 ## Público Alvo
-- Determine o seu público alvo.
-- Que tipo de jogo mais agrada o seu público alvo?
-- Que desejos do público alvo o seu jogo satisfaz?
 
 *Templus Fugit* é voltado para **jovens adultos entre 16 e 30 anos**, especialmente aqueles que buscam **experiências desafiadoras, dinâmicas e com alto fator de rejogabilidade**. Esse público costuma ser composto por **entusiastas de jogos independentes**, **fãs de roguelikes**, e jogadores que se interessam por **mecânicas inovadoras**, **histórias enigmáticas** e **progressão baseada em tentativa e erro**.
 
