@@ -1,18 +1,5 @@
 ## Mecânica
 
-- Apresente os elementos formais do jogo
-    - Qual o padrão de interação do jogador?
-    - Qual o objetivo do jogo? 
-        - Quando o jogador ganha?
-        - Quando o jogador perde?
-    - Quais são as regrsas do jogo?
-    - Quais são os procedimentos do jogo?
-    - Quais os recursos do jogo?
-    - Quais os limites do jogo?
-    - Quais os resultados do jogo?
-        - Como ele termina depois da vitoria
-        - Como ele termina depois da derrota
-
 ### Padrão de Interação do Jogador
 O jogador interage com o ambiente do jogo por meio de comandos rápidos de teclado, ativando sequências específicas de teclas para superar obstáculos, manipular o tempo e enfrentar desafios. A experiência é baseada na reação ágil, raciocínio sob pressão e no uso estratégico de recursos adquiridos.
 
