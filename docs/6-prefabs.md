@@ -15,7 +15,7 @@
 - **Quando é utilizada:** Presente em todas as fases como personagem principal.
 - **Componentes:**
   - **Sprites:** Sprites de animação para caminhada e estado parado.
-        ![suzan](https://github.com/gb-cs-rt/stoc_fispq/blob/main/Imagens/Logo2.webp)
+        ![suzan](https://github.com)
   - **Colisores:** BoxCollider2D para detectar colisões com o cenário e inimigos.
   - **Fontes de Áudio:** Passos, ataque, uso de habilidade, dano recebido.
   - **Scripts:**
