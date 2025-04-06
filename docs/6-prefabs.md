@@ -15,7 +15,7 @@
 - **Quando é utilizada:** Espalhada no mapa e obtida após desafios.
 - **Componentes:**
   - **Sprite:** `ampulheta.jpg`
-        ![ampulheta](https://raw.githubusercontent.com/gb-cs-rt/elevator/refs/heads/main/diagrama_atividades/images/diagrama_atividade_modulo_cadastro_gerenciamento.png)
+        ![ampulheta](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/ampulheta.jpg)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `ampulheta_pickup.wav`
   - **Scripts:**
@@ -29,6 +29,7 @@
 - **Quando é utilizada:** Após combates ou escondida no mapa.
 - **Componentes:**
   - **Sprite:** `pocao_vida.jpg`
+        ![pocao](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/pocao_vida.jpg)
   - **Colisor:** `CircleCollider2D`
   - **Fonte de Áudio:** `potion_drink.wav`
   - **Scripts:**
@@ -42,6 +43,7 @@
 - **Quando é utilizada:** Coletável que desbloqueia cutscenes ou segredos.
 - **Componentes:**
   - **Sprite:** `fragmento_memoria.jpg`
+        ![fragmento](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/fragmento_memoria.jpg)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `memory_fragment.wav`
   - **Scripts:**
@@ -55,6 +57,7 @@
 - **Quando é utilizado:** Em áreas ocultas ou eventos críticos.
 - **Componentes:**
   - **Sprite:** `olho_oraculo.jpg`
+        ![fragmento](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/olho_oraculo.jpg)
   - **Colisor:** `BoxCollider2D` (`IsTrigger`)
   - **Fonte de Áudio:** `oracle_eye.wav`
   - **Scripts:**
@@ -68,6 +71,7 @@
 - **Quando é utilizada:** Em puzzles e armadilhas temporais.
 - **Componentes:**
   - **Sprite:** `marca_de_cronos.jpg`
+        ![marca](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/marca_de_cronos.jpg)
   - **Colisor:** `PolygonCollider2D`
   - **Fonte de Áudio:** `corruption.wav`
   - **Scripts:**
@@ -81,6 +85,12 @@
 - **Quando é utilizado:** Em boss fights ao longo da campanha.
 - **Componentes:**
   - **Sprites:** `cronos_fullvida.jpg`, `cronos_metadevida.jpg`, `cronos_vidabaixa.jpg`
+    - Vida Completa
+        ![cronosfullvida](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/cronos_fullvida.jpg)
+    - Metade da vida
+        ![cronosmetadevida](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/cronos_metadevida.jpg)
+    - Vida baixa 
+        ![cronosvidabaixa](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/cronos_vidabaixa.jpg)
   - **Colisor:** `BoxCollider2D` + `Rigidbody2D`
   - **Fonte de Áudio:** `cronos_theme.wav`
   - **Scripts:**
@@ -95,6 +105,7 @@
 - **Quando é utilizado:** Em áreas com forte influência de Cronos.
 - **Componentes:**
   - **Sprite:** `inimigo1.jpg`
+        ![inimigo1](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/inimigo1.jpg)
   - **Colisor:** `CircleCollider2D`
   - **Fonte de Áudio:** `sentinel_alert.wav`
   - **Scripts:**
@@ -109,6 +120,7 @@
 - **Quando é utilizado:** Próximo a fragmentos.
 - **Componentes:**
   - **Sprite:** `inimigo2.jpg`
+        ![inimigo2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/inimigo2.jpg)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `memory_guard.wav`
   - **Scripts:**
@@ -123,6 +135,11 @@
 - **Quando é utilizada:** Sempre durante a exploração do templo.
 - **Componentes:**
   - **Sprites:** Suzan parada (`suzan_idle.png`), Suzan andando (`suzan_walk1.png`, `suzan_walk2.png`)
+      - Parada
+        ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan3.jpg)
+      - Andando
+        ![suzanandando1](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan1.jpg)
+        ![suzanandando2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan2.jpg)
   - **Colisor:** `CapsuleCollider2D`
   - **Fonte de Áudio:** `footsteps.wav`, `damage.wav`
   - **Scripts:**
@@ -138,6 +155,7 @@
 - **Quando é utilizado:** Dentro da loja acessível no templo.
 - **Componentes:**
   - **Sprite:** `vendedor_loja.png`
+        ![vendedor](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/vendedor%20loja.jpg)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `shopkeeper_greeting.wav`
   - **Scripts:**
@@ -152,6 +170,7 @@
 - **Quando é utilizado:** Durante combates ou puzzles que exigem rapidez.
 - **Componentes:**
   - **Sprite:** `relogio_quebrado.png`
+        ![relogio](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/relogio_quebrado.jpg)
   - **Colisor:** `None` (UI/Inventário)
   - **Fonte de Áudio:** `broken_clock.wav`
   - **Scripts:**
@@ -165,6 +184,7 @@
 - **Quando é utilizado:** Equipado após compra; ativado junto à habilidade principal.
 - **Componentes:**
   - **Sprite:** `veu_nyx.png`
+        ![veu](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/V%C3%A9u_de_Nyx.jpg)
   - **Colisor:** `None` (UI/Inventário)
   - **Fonte de Áudio:** `veil_activate.wav`
   - **Scripts:**
