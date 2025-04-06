@@ -12,26 +12,26 @@
 ### Ampulheta
 
 - **Descrição:** Item mágico essencial que permite ao jogador manipular o tempo.
-- **Quando é utilizada:** Espalhada no mapa e obtida após desafios.
+- **Quando é utilizada:** Disponível para venda na loja.
 - **Componentes:**
   - **Sprite:** `ampulheta.jpg`
         ![ampulheta](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/ampulheta.jpg)
-  - **Colisor:** `BoxCollider2D`
-  - **Fonte de Áudio:** `ampulheta_pickup.wav`
+  - **Colisor:** `None`
+  - **Fonte de Áudio:** `ampulheta_pickup.mp3`
   - **Scripts:**
-    - `AmpulhetaController.cs`: ativa o poder temporal, aplica efeitos e remove o item da cena.
+    - `AmpulhetaController.cs`: ativa o poder temporal e aplica adicina tempo extra.
 
 ---
 
 ### Poção de Vida
 
 - **Descrição:** Item que restaura vida total ou parcial do jogador.
-- **Quando é utilizada:** Após combates ou escondida no mapa.
+- **Quando é utilizada:** Disponível para venda na loja.
 - **Componentes:**
   - **Sprite:** `pocao_vida.jpg`
         ![pocao](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/pocao_vida.jpg)
-  - **Colisor:** `CircleCollider2D`
-  - **Fonte de Áudio:** `potion_drink.wav`
+  - **Colisor:** `None`
+  - **Fonte de Áudio:** `potion_drink.mp3`
   - **Scripts:**
     - `PotionPickup.cs`: restaura vida, toca som e remove o item.
 
@@ -40,28 +40,28 @@
 ### Fragmento de Memória
 
 - **Descrição:** Fragmentos que revelam o passado do personagem e do vilão.
-- **Quando é utilizada:** Coletável que desbloqueia cutscenes ou segredos.
+- **Quando é utilizada:** Coletável que desbloqueia segredos.
 - **Componentes:**
   - **Sprite:** `fragmento_memoria.jpg`
         ![fragmento](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/fragmento_memoria.jpg)
   - **Colisor:** `BoxCollider2D`
-  - **Fonte de Áudio:** `memory_fragment.wav`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `MemoryFragment.cs`: salva progresso, ativa cutscene e atualiza UI.
+    - `MemoryFragment.cs`: Ativa caixa de diálogo.
 
 ---
 
 ### Olho do Oráculo
 
 - **Descrição:** Artefato que revela segredos e inimigos invisíveis.
-- **Quando é utilizado:** Em áreas ocultas ou eventos críticos.
+- **Quando é utilizado:** Em áreas ocultas.
 - **Componentes:**
   - **Sprite:** `olho_oraculo.jpg`
         ![fragmento](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/olho_oraculo.jpg)
-  - **Colisor:** `BoxCollider2D` (`IsTrigger`)
-  - **Fonte de Áudio:** `oracle_eye.wav`
+  - **Colisor:** `BoxCollider2D`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `OracleEye.cs`: revela segredos, muda ambiente e entra em cooldown.
+    - `OracleEye.cs`: revela segredos e entra em cooldown.
 
 ---
 
@@ -73,7 +73,7 @@
   - **Sprite:** `marca_de_cronos.jpg`
         ![marca](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/marca_de_cronos.jpg)
   - **Colisor:** `PolygonCollider2D`
-  - **Fonte de Áudio:** `corruption.wav`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
     - `CronosMark.cs`: altera regras do tempo e pode causar debuffs.
 
@@ -92,10 +92,9 @@
     - Vida baixa 
         ![cronosvidabaixa](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/cronos_vidabaixa.jpg)
   - **Colisor:** `BoxCollider2D` + `Rigidbody2D`
-  - **Fonte de Áudio:** `cronos_theme.wav`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `CronosAI.cs`: controla ataques e padrões dinâmicos.
-    - `BossHealthManager.cs`: muda comportamento com base na vida.
+    - `CronosAI.cs`: controla ataques e padrões dinâmicos e muda comportamento com base na vida.
 
 ---
 
@@ -106,11 +105,10 @@
 - **Componentes:**
   - **Sprite:** `inimigo1.jpg`
         ![inimigo1](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/inimigo1.jpg)
-  - **Colisor:** `CircleCollider2D`
-  - **Fonte de Áudio:** `sentinel_alert.wav`
+  - **Colisor:** `BoxCollider2D`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `EnemyPatrol.cs`: patrulha e ataca com energia temporal.
-    - `EnemyHealth.cs`: gerencia vida e efeitos de morte.
+    - `EnemyPatrol.cs`: patrulha e gerencia vida e efeitos de morte.
 
 ---
 
@@ -122,11 +120,9 @@
   - **Sprite:** `inimigo2.jpg`
         ![inimigo2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/inimigo2.jpg)
   - **Colisor:** `BoxCollider2D`
-  - **Fonte de Áudio:** `memory_guard.wav`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `MemoryGuardianAI.cs`: persegue o jogador e ataca em área.
-    - `GuardianHealth.cs`: libera fragmento após derrota.
-
+    - `MemoryGuardianAI.cs`: persegue o jogador e ataca.
 ---
 
 ### Suzan (Personagem Jogável)
@@ -140,12 +136,10 @@
       - Andando
         ![suzanandando1](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan1.jpg)
         ![suzanandando2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan2.jpg)
-  - **Colisor:** `CapsuleCollider2D`
-  - **Fonte de Áudio:** `footsteps.wav`, `damage.wav`
+  - **Colisor:** `BoxCollider2D`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `PlayerMovement.cs`: movimentação com animações.
-    - `PlayerInteraction.cs`: coleta, combate e interação com NPCs/objetos.
-    - `HealthSystem.cs`: gerencia vida, dano e morte.
+    - `Player.cs`: movimentação com animações, coleta, combate, interação com NPCs/objetos, gerencia vida, dano e morte.
 
 ---
 
@@ -157,7 +151,7 @@
   - **Sprite:** `vendedor_loja.png`
         ![vendedor](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/vendedor%20loja.jpg)
   - **Colisor:** `BoxCollider2D`
-  - **Fonte de Áudio:** `shopkeeper_greeting.wav`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
     - `ShopkeeperDialogue.cs`: exibe diálogos e opções de compra.
     - `ShopInterface.cs`: ativa UI da loja e manipula inventário.
@@ -171,24 +165,24 @@
 - **Componentes:**
   - **Sprite:** `relogio_quebrado.png`
         ![relogio](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/relogio_quebrado.jpg)
-  - **Colisor:** `None` (UI/Inventário)
-  - **Fonte de Áudio:** `broken_clock.wav`
+  - **Colisor:** `None` 
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `TimeDistortionItem.cs`: aplica efeito de lentidão global por tempo limitado.
+    - `TimeDistortionItem.cs`: o tempo para por 10 segundos.
 
 ---
 
 ### Véu de Nyx
 
-- **Descrição:** Item passivo que torna Suzan invisível temporariamente ao usar a Ampulheta.
-- **Quando é utilizado:** Equipado após compra; ativado junto à habilidade principal.
+- **Descrição:** Item passivo que torna Suzan invisível temporariamente.
+- **Quando é utilizado:** Equipado após compra.
 - **Componentes:**
   - **Sprite:** `veu_nyx.png`
         ![veu](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/V%C3%A9u_de_Nyx.jpg)
-  - **Colisor:** `None` (UI/Inventário)
-  - **Fonte de Áudio:** `veil_activate.wav`
+  - **Colisor:** `None`
+  - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `NyxVeilPassive.cs`: ativa invisibilidade quando a manipulação do tempo está ativa.
+    - `NyxVeilPassive.cs`: ativa invisibilidade.
 
 ---
 
@@ -197,8 +191,9 @@
 - **Descrição:** Baú que pode conter poções, fragmentos ou itens raros.
 - **Quando é utilizado:** Espalhado pelo mapa como recompensa de exploração.
 - **Componentes:**
-  - **Sprite:** `bau_fechado.png`, `bau_aberto.png`
+  - **Sprite:** `bau_fechado.png`
+        ![bau](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/bau.jpg)
   - **Colisor:** `BoxCollider2D`
-  - **Fonte de Áudio:** `chest_open.wav`
+  - **Fonte de Áudio:** `chest_open.mp3`
   - **Scripts:**
-    - `ChestController.cs`: abre o baú, sorteia recompensa e atualiza o sprite.
+    - `ChestController.cs`: desafio para abrir o baú, sorteia recompensa.
