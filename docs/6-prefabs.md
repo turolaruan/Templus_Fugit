@@ -121,7 +121,9 @@
 - **Descrição:** Protagonista controlada pelo jogador.
 - **Quando é utilizada:** Sempre durante a exploração do templo.
 - **Componentes:**
-  - **Sprites:** Suzan parada (`suzan_idle.png`), Suzan andando (`suzan_walk1.png`, `suzan_walk2.png`)
+  - **Sprites:** Suzan frente (`suzan4.png`),Suzan parada (`suzan3.png`), Suzan andando (`suzan1.png`, `suzan2.png`)
+      - frente
+        ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan4.jpg)
       - Parada
         ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan3.jpg)
       - Andando
@@ -207,7 +209,8 @@
 - **Quando é utilizado:** Em todas as cenas do jogo, variando conforme a fase ou evento.
 - **Componentes:**
   - **Sprite:** `background.jpg`  
-    ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/background.jpg)
+    ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/backgound.jpg)
+    ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/backgound2.jpg)
   - **Colisor:** `None`
   - **Fonte de Áudio:** `None`
   - **Scripts:**
