@@ -200,3 +200,15 @@
   - **Fonte de Áudio:** `None`
   - **Scripts:**
     - `CoinPickup.cs`: adiciona moeda ao inventário.
+   
+### Background
+
+- **Descrição:** Cenário visual do jogo, define o clima, ambientação e atmosfera do templo.
+- **Quando é utilizado:** Em todas as cenas do jogo, variando conforme a fase ou evento.
+- **Componentes:**
+  - **Sprite:** `background.jpg`  
+    ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/background.jpg)
+  - **Colisor:** `None`
+  - **Fonte de Áudio:** `None`
+  - **Scripts:**
+    - `ParallaxController.cs`: aplica efeito de paralaxe para dar profundidade ao cenário.
