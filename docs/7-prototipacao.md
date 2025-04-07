@@ -35,3 +35,5 @@
       ![escolha2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/prototipo_tipos_de_escolha2.jpg)
   - Escolha 3
       ![escolha3](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/prototipo_tipos_de_escolha3.jpg)
+  - Escolha 4
+      ![escolha4](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/prototipo_tipos_de_escolha4.jpg)
