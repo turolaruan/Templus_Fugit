@@ -113,7 +113,7 @@
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `None`
   - **Scripts:**
-    - `MemoryGuardianAI.cs`: persegue o jogador e ataca.
+    - `MemoryGuardian.cs`: persegue o jogador e ataca.
 ---
 
 ### Suzan (Personagem Jogável)
