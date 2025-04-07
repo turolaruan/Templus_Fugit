@@ -60,10 +60,6 @@ O objetivo principal é escapar do Templo de Cronos, rompendo o ciclo temporal a
 - O jogador alcança a última sala e utiliza todos os artefatos coletados para abrir o portal de saída.
 - A vitória pode ter variações de final dependendo dos Fragmentos de Memória coletados, revelando ou ocultando verdades sobre o templo e Suzan.
 
-**Exemplos de finais:**
-- **Final Padrão:** Suzan escapa do templo e quebra o ciclo.
-- **Final Verdadeiro:** Ao reunir todos os fragmentos, Suzan descobre que o templo é um loop criado por suas próprias escolhas e ganha controle sobre o tempo.
-
 #### Derrota:
 - O jogador é consumido pela onda de luz.
 - Suzan retorna à Sala Inicial, com parte dos recursos resetados (exceto itens passivos fixos).
