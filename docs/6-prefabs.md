@@ -211,6 +211,7 @@
   - **Sprite:** `background.jpg`  
     ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/backgound.jpg)
     ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/backgound2.jpg)
+    ![background](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/tile.png)
   - **Colisor:** `None`
   - **Fonte de Áudio:** `None`
   - **Scripts:**
