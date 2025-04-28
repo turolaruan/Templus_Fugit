@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void Depurar()
+    {
+        Debug.Log("Pressionado");
+    }
+
     // Update is called once per frame
     void Update()
     {
