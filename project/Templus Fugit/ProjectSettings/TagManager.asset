@@ -50,6 +50,12 @@ TagManager:
   - name: Obstacle
     uniqueID: 3986783385
     locked: 0
+  - name: fragmento
+    uniqueID: 3295202613
+    locked: 0
   - name: Player
     uniqueID: 2875074227
+    locked: 0
+  - name: Vendedor
+    uniqueID: 3064089973
     locked: 0

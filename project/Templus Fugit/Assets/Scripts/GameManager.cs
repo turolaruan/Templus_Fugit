@@ -115,6 +115,18 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        if (SceneManager.GetActiveScene().name == "Level2")
+        {
+            Vector2 playerPosition = thePlayer.transform.position;
+            if (playerPosition.x >= -0.9350259f && playerPosition.x <= 0.935003f && Mathf.Approximately(playerPosition.y, 15.4524f))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    SceneManager.LoadScene("Level3");
+                }
+            }
+        }
     }
 
     // Gerência da pontuação e fluxo do jogo
