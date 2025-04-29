@@ -76,21 +76,43 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (thePlayer == null)
+        {
+            thePlayer = GameObject.FindGameObjectWithTag("Player");
+            if (thePlayer == null)
+            {
+                return; // ainda não está disponível, evita NullReference
+            }
+        }
+
         DrawLifes();
 
-        if (PlayerScore1 >= 7)
+        // if (PlayerScore1 >= 7)
+        // {
+        //     if (SceneManager.GetActiveScene().buildIndex == 2) // Check if it's the second level
+        //     {
+        //     PlayerScore1 = 0; // Reset score when reaching 7 points
+        //     lifes = 3; // Reset lifes when reaching 7 points
+        //     SceneManager.LoadScene("YouWin"); // Load the victory scene
+        //     }
+        //     else
+        //     {
+        //     PlayerScore1 = 0; // Reset score when reaching 7 points
+        //     lifes = 3; // Reset lifes when reaching 7 points
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
+        //     }
+        // }
+
+        // Verifica se o jogador está na posição especificada e se a tecla F foi pressionada
+        if (SceneManager.GetActiveScene().name == "Level1")
         {
-            if (SceneManager.GetActiveScene().buildIndex == 2) // Check if it's the second level
+            Vector2 playerPosition = thePlayer.transform.position;
+            if (playerPosition.x >= -1.909972f && playerPosition.x <= 1.910001f && Mathf.Approximately(playerPosition.y, 34.06695f))
             {
-            PlayerScore1 = 0; // Reset score when reaching 7 points
-            lifes = 3; // Reset lifes when reaching 7 points
-            SceneManager.LoadScene("YouWin"); // Load the victory scene
-            }
-            else
-            {
-            PlayerScore1 = 0; // Reset score when reaching 7 points
-            lifes = 3; // Reset lifes when reaching 7 points
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    SceneManager.LoadScene("Level2");
+                }
             }
         }
     }
