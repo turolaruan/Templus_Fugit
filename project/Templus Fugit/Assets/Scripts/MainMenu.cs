@@ -30,4 +30,14 @@ public class MainMenu : MonoBehaviour
         // Carrega a cena de instruções
         SceneManager.LoadScene("Instructions");
     }
+
+    public void Volume() {
+        // Carrega a cena de volume
+        SceneManager.LoadScene("VolumeGame");
+    }
+
+    public void QuitGame() {
+        // Fecha o jogo
+        Application.Quit();
+    }
 }
