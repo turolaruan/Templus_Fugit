@@ -104,27 +104,45 @@ public class GameManager : MonoBehaviour
         // }
 
         // Verifica se o jogador está na posição especificada e se a tecla F foi pressionada
-        if (SceneManager.GetActiveScene().name == "Level1")
+        // Verifica se o jogador está na posição especificada e troca de cena automaticamente
+        Vector2 playerPosition = thePlayer.transform.position;
+        if (SceneManager.GetActiveScene().name == "Cena1")
         {
-            Vector2 playerPosition = thePlayer.transform.position;
             if (playerPosition.x >= -1.909972f && playerPosition.x <= 1.910001f && Mathf.Approximately(playerPosition.y, 34.06695f))
             {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    SceneManager.LoadScene("Level2");
-                }
+                SceneManager.LoadScene("Cena2");
             }
         }
 
-        if (SceneManager.GetActiveScene().name == "Level2")
+        else if (SceneManager.GetActiveScene().name == "Cena2")
         {
-            Vector2 playerPosition = thePlayer.transform.position;
             if (playerPosition.x >= -0.9350259f && playerPosition.x <= 0.935003f && Mathf.Approximately(playerPosition.y, 15.4524f))
             {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    SceneManager.LoadScene("Level3");
-                }
+                SceneManager.LoadScene("Cena5");
+            }
+            else if (Mathf.Approximately(playerPosition.x, -6.608945f) && playerPosition.y >= 8.068845f && playerPosition.y <= 8.935001f)
+            {
+                SceneManager.LoadScene("Cena3");
+            }
+            else if (Mathf.Approximately(playerPosition.x, 6.41f) && playerPosition.y >= 8.064985f && playerPosition.y <= 8.935001f)
+            {
+                SceneManager.LoadScene("Cena4");
+            }
+        }
+
+        else if (SceneManager.GetActiveScene().name == "Cena3")
+        {
+            if (Mathf.Approximately(playerPosition.x, 6.48f) && playerPosition.y >= -1.935015f && playerPosition.y <= -1.208376f)
+            {
+                SceneManager.LoadScene("Cena2");
+            }
+        }
+
+        else if (SceneManager.GetActiveScene().name == "Cena4")
+        {
+            if (Mathf.Approximately(playerPosition.x, -6.6f) && playerPosition.y >= -1.477549f && playerPosition.y <= -0.5053926f)
+            {
+                SceneManager.LoadScene("Cena2");
             }
         }
     }
