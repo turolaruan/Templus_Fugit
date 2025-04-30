@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d; // Define o corpo rigido 2D que representa o player
     private Vector2 movement; // Define o vetor de movimento do player
 
+    // public Animator animator; // Define o animator do player
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,5 +55,8 @@ public class PlayerController : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, boundYBaixo, boundYCima);
 
         rb2d.MovePosition(newPosition);
+
+        // float move = Input.GetAxis("Horizontal");
+        // animator.SetBool("isWalking", move != 0);
     }
 }
