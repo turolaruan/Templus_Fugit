@@ -21,6 +21,14 @@ public class vendedorController : MonoBehaviour
             GameObject item = Instantiate(embaralhado[i], itemSlots[i].position, Quaternion.identity);// Cria uma cópia do item no slot correspondente
             item.transform.SetParent(itemSlots[i]); // Define o slot como "pai" do item para organizar a hierarquia na cena (opcional)
 
+            // Atribui um valor aleatório entre 10 e 100, por exemplo
+            int precoAleatorio = Random.Range(10, 20);
+
+            StoreItem itemScript = item.GetComponent<StoreItem>();
+            if (itemScript != null)
+            {
+                itemScript.DefinirPreco(precoAleatorio);
+            }
         }
     }
 
