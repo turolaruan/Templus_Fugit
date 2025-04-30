@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      seta_exemplo-removebg-preview_0: 2588179892016223617
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
