@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         {
             if (playerPosition.x >= -0.9350259f && playerPosition.x <= 0.935003f && Mathf.Approximately(playerPosition.y, 15.4524f))
             {
-                SceneManager.LoadScene("Cena5");
+                SceneManager.LoadScene("Cena6");
             }
             else if (Mathf.Approximately(playerPosition.x, -6.608945f) && playerPosition.y >= 8.068845f && playerPosition.y <= 8.935001f)
             {
