@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public static int lifes = 3;        // Vidas do jogador
     public static GameObject thePlayer; // Referência ao objeto jogador
 
+    // Dicionário para armazenar a última posição do jogador em cada cena
+    private Dictionary<string, Vector3?> savedPositions = new Dictionary<string, Vector3?>();
+
     void Awake()
     {
         // Implement the singleton pattern
@@ -25,11 +28,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        // Registra o evento de carregamento de cena
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        // Remove o registro do evento de carregamento de cena
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Chamado quando uma nova cena é carregada
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        thePlayer = GameObject.FindGameObjectWithTag("Player"); // Atualiza a referência ao jogador
+        PositionPlayerOnSceneLoad(); // Posiciona o jogador na cena carregada
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         thePlayer = GameObject.FindGameObjectWithTag("Player"); // Busca a referência do jogador
         DrawLifes();
+        PositionPlayerOnSceneLoad();
     }
 
     public void LoseLife()
@@ -39,6 +62,7 @@ public class GameManager : MonoBehaviour
         // Reload the scene, reset coins, reset score, but keep player lives
         if (lifes > 0)
         {
+            SavePlayerPosition(); // Salva a posição antes de recarregar a cena
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -73,6 +97,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Salva a posição atual do jogador no dicionário
+    private void SavePlayerPosition()
+    {
+        if (thePlayer != null)
+        {
+            string currentScene = SceneManager.GetActiveScene().name;
+            savedPositions[currentScene] = thePlayer.transform.position;
+        }
+    }
+
+    // Posiciona o jogador ao carregar uma nova cena
+    private void PositionPlayerOnSceneLoad()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (savedPositions.ContainsKey(currentScene) && savedPositions[currentScene].HasValue)
+        {
+            // Posiciona o jogador na última posição salva
+            thePlayer.transform.position = savedPositions[currentScene].Value + new Vector3(0.05f, 0.05f, 0f);
+        }
+        else
+        {
+            // Define a posição padrão (ponto de spawn)
+            GameObject spawnPoint = GameObject.Find("SpawnPoint");
+            if (spawnPoint != null)
+            {
+                thePlayer.transform.position = spawnPoint.transform.position;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -87,29 +142,13 @@ public class GameManager : MonoBehaviour
 
         DrawLifes();
 
-        // if (PlayerScore1 >= 7)
-        // {
-        //     if (SceneManager.GetActiveScene().buildIndex == 2) // Check if it's the second level
-        //     {
-        //     PlayerScore1 = 0; // Reset score when reaching 7 points
-        //     lifes = 3; // Reset lifes when reaching 7 points
-        //     SceneManager.LoadScene("YouWin"); // Load the victory scene
-        //     }
-        //     else
-        //     {
-        //     PlayerScore1 = 0; // Reset score when reaching 7 points
-        //     lifes = 3; // Reset lifes when reaching 7 points
-        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
-        //     }
-        // }
-
-        // Verifica se o jogador está na posição especificada e se a tecla F foi pressionada
-        // Verifica se o jogador está na posição especificada e troca de cena automaticamente
+        // Salva a posição do jogador antes de trocar de cena
         Vector2 playerPosition = thePlayer.transform.position;
         if (SceneManager.GetActiveScene().name == "Cena1")
         {
             if (playerPosition.x >= -1.909972f && playerPosition.x <= 1.910001f && Mathf.Approximately(playerPosition.y, 34.06695f))
             {
+                SavePlayerPosition();
                 SceneManager.LoadScene("Cena2");
             }
         }
@@ -118,14 +157,17 @@ public class GameManager : MonoBehaviour
         {
             if (playerPosition.x >= -0.9350259f && playerPosition.x <= 0.935003f && Mathf.Approximately(playerPosition.y, 15.4524f))
             {
+                SavePlayerPosition();
                 SceneManager.LoadScene("Cena6");
             }
             else if (Mathf.Approximately(playerPosition.x, -6.608945f) && playerPosition.y >= 8.068845f && playerPosition.y <= 8.935001f)
             {
+                SavePlayerPosition();
                 SceneManager.LoadScene("Cena3");
             }
             else if (Mathf.Approximately(playerPosition.x, 6.41f) && playerPosition.y >= 8.064985f && playerPosition.y <= 8.935001f)
             {
+                SavePlayerPosition();
                 SceneManager.LoadScene("Cena4");
             }
         }
@@ -134,6 +176,7 @@ public class GameManager : MonoBehaviour
         {
             if (Mathf.Approximately(playerPosition.x, 6.48f) && playerPosition.y >= -1.935015f && playerPosition.y <= -1.208376f)
             {
+                SavePlayerPosition();
                 SceneManager.LoadScene("Cena2");
             }
         }
@@ -142,7 +185,31 @@ public class GameManager : MonoBehaviour
         {
             if (Mathf.Approximately(playerPosition.x, -6.6f) && playerPosition.y >= -1.477549f && playerPosition.y <= -0.5053926f)
             {
+                SavePlayerPosition();
                 SceneManager.LoadScene("Cena2");
+            }
+        }
+
+        else if (SceneManager.GetActiveScene().name == "Cena6")
+        {
+            if (playerPosition.x >= -0.7060629f && playerPosition.x <= 0.7072755f && Mathf.Approximately(playerPosition.y, -3.354688f))
+            {
+                SavePlayerPosition();
+                SceneManager.LoadScene("Cena2");
+            }
+            else if (playerPosition.x >= -0.7181748f && playerPosition.x <= 0.7148368f && Mathf.Approximately(playerPosition.y, 2.223252f))
+            {
+                SavePlayerPosition();
+                SceneManager.LoadScene("Cena8");
+            }
+        }
+
+        else if (SceneManager.GetActiveScene().name == "Cena8")
+        {
+            if (playerPosition.x >= -0.7060629f && playerPosition.x <= 0.7072755f && Mathf.Approximately(playerPosition.y, -3.354688f))
+            {
+                SavePlayerPosition();
+                SceneManager.LoadScene("Cena6");
             }
         }
     }
@@ -158,6 +225,7 @@ public class GameManager : MonoBehaviour
     {
         lifes = 3; // Reset lifes when game is over
         PlayerScore1 = 0; // Reset score when game is over
+        savedPositions.Clear(); // Limpa todas as posições salvas
         SceneManager.LoadScene("GameOver");
     }
 
@@ -165,6 +233,7 @@ public class GameManager : MonoBehaviour
     {
         lifes = 3; // Reset lifes only when restarting the entire game
         PlayerScore1 = 0;
+        savedPositions.Clear(); // Limpa todas as posições salvas
     }
 
     public void AddScore()
