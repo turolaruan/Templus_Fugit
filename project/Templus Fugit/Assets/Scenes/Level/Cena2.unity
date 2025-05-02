@@ -9641,6 +9641,14 @@ MonoBehaviour:
   boundXDireita: 6.41
   boundYBaixo: -3.445987
   boundYCima: 15.45241
+  andarCima: {fileID: 9100000, guid: b6c377b2ea2cf5d44ade3abf112cbc35, type: 2}
+  andarBaixo: {fileID: 9100000, guid: 9196e18e9fe1e804497710eca0ee5590, type: 2}
+  andarEsquerda: {fileID: 9100000, guid: 4eb6622775425d84191349b3e7a66233, type: 2}
+  andarDireita: {fileID: 9100000, guid: a8165fbd11f164241a74f7322560ded5, type: 2}
+  paradoCostas: {fileID: 9100000, guid: ba5817ba053cb8f458e9780e312691eb, type: 2}
+  paradoFrente: {fileID: 9100000, guid: 7a741dbc8c6f5f34eb736aff3f629daf, type: 2}
+  paradoEsquerda: {fileID: 9100000, guid: 0632cb0f475d56849b9100ada5dac7fb, type: 2}
+  paradoDireita: {fileID: 9100000, guid: 1dad070368fdfd14d90f092146e29332, type: 2}
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -9973,7 +9981,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.25
+  orthographic size: 3.0688415
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10018,8 +10026,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
   smoothSpeed: 1
-  minCameraBounds: {x: -0.09, y: -0.74, z: 0}
-  maxCameraBounds: {x: -0.09, y: 12.75, z: 0}
+  minCameraBounds: {x: -0.03, y: -0.89, z: 0}
+  maxCameraBounds: {x: -0.03, y: 12.75, z: 0}
 --- !u!1 &1241014220
 GameObject:
   m_ObjectHideFlags: 0
@@ -10232,7 +10240,7 @@ SpriteRenderer:
   m_SortingLayerID: -1419893069
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7219066547588084184, guid: 70ef14dabb03e294c82fa885dd2c7f19, type: 3}
+  m_Sprite: {fileID: -4273276076692731511, guid: 70ef14dabb03e294c82fa885dd2c7f19, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

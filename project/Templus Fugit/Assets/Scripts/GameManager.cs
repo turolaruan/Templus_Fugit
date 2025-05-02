@@ -114,8 +114,22 @@ public class GameManager : MonoBehaviour
 
         if (savedPositions.ContainsKey(currentScene) && savedPositions[currentScene].HasValue)
         {
-            // Posiciona o jogador na última posição salva
-            thePlayer.transform.position = savedPositions[currentScene].Value + new Vector3(0.05f, 0.05f, 0f);
+            if (currentScene == "Cena2")
+            {
+                thePlayer.transform.position = savedPositions[currentScene].Value + new Vector3(0.05f, -0.05f, 0f);
+            }
+            else if (currentScene == "Cena3")
+            {
+                thePlayer.transform.position = savedPositions[currentScene].Value + new Vector3(-0.1f, 0f, 0f);
+            }
+            else if (currentScene == "Cena6")
+            {
+                thePlayer.transform.position = savedPositions[currentScene].Value + new Vector3(0f, 0.5f, 0f);
+            }
+            else
+            {
+                thePlayer.transform.position = savedPositions[currentScene].Value;
+            }
         }
         else
         {
@@ -202,11 +216,25 @@ public class GameManager : MonoBehaviour
                 SavePlayerPosition();
                 SceneManager.LoadScene("Cena8");
             }
+            else if (Mathf.Approximately(playerPosition.x, 6.514736f) && playerPosition.y >= -1.51467f && playerPosition.y <= 0.5432134f)
+            {
+                SavePlayerPosition();
+                SceneManager.LoadScene("Cena9");
+            }
         }
 
         else if (SceneManager.GetActiveScene().name == "Cena8")
         {
             if (playerPosition.x >= -0.7060629f && playerPosition.x <= 0.7072755f && Mathf.Approximately(playerPosition.y, -3.354688f))
+            {
+                SavePlayerPosition();
+                SceneManager.LoadScene("Cena6");
+            }
+        }
+
+        else if (SceneManager.GetActiveScene().name == "Cena9")
+        {
+            if (Mathf.Approximately(playerPosition.x, -6.678032f) && playerPosition.y >= -1.475696f && playerPosition.y <= 0.5104183f)
             {
                 SavePlayerPosition();
                 SceneManager.LoadScene("Cena6");
