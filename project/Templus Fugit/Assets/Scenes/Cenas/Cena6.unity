@@ -7399,14 +7399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
-  andarCima: {fileID: 0}
-  andarBaixo: {fileID: 0}
-  andarEsquerda: {fileID: 0}
-  andarDireita: {fileID: 0}
-  paradoCostas: {fileID: 0}
-  paradoFrente: {fileID: 0}
-  paradoEsquerda: {fileID: 0}
-  paradoDireita: {fileID: 0}
 --- !u!1 &502994296
 GameObject:
   m_ObjectHideFlags: 0
@@ -7517,7 +7509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &536094888
 Transform:
   m_ObjectHideFlags: 0
@@ -7853,18 +7845,18 @@ MonoBehaviour:
   moveLeftKey: 97
   moveRightKey: 100
   moveSpeed: 35
-  boundXEsquerda: -5.75
-  boundXDireita: 5.64
-  boundYBaixo: -3.354688
-  boundYCima: 2.223252
-  andarCima: {fileID: 0}
-  andarBaixo: {fileID: 0}
-  andarEsquerda: {fileID: 0}
-  andarDireita: {fileID: 0}
-  paradoCostas: {fileID: 0}
-  paradoFrente: {fileID: 0}
-  paradoEsquerda: {fileID: 0}
-  paradoDireita: {fileID: 0}
+  boundXEsquerda: -5.897472
+  boundXDireita: 5.73647
+  boundYBaixo: -3.11787
+  boundYCima: 2.016829
+  andarCima: {fileID: 9100000, guid: b6c377b2ea2cf5d44ade3abf112cbc35, type: 2}
+  andarBaixo: {fileID: 9100000, guid: 9196e18e9fe1e804497710eca0ee5590, type: 2}
+  andarEsquerda: {fileID: 9100000, guid: 4eb6622775425d84191349b3e7a66233, type: 2}
+  andarDireita: {fileID: 9100000, guid: a8165fbd11f164241a74f7322560ded5, type: 2}
+  paradoCostas: {fileID: 9100000, guid: ba5817ba053cb8f458e9780e312691eb, type: 2}
+  paradoFrente: {fileID: 9100000, guid: 7a741dbc8c6f5f34eb736aff3f629daf, type: 2}
+  paradoEsquerda: {fileID: 9100000, guid: 0632cb0f475d56849b9100ada5dac7fb, type: 2}
+  paradoDireita: {fileID: 9100000, guid: 1dad070368fdfd14d90f092146e29332, type: 2}
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -7947,7 +7939,7 @@ Transform:
   m_GameObject: {fileID: 679315463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -3.25, z: 0}
+  m_LocalPosition: {x: 0.02, y: -2.7, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8189,14 +8181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
-  andarCima: {fileID: 0}
-  andarBaixo: {fileID: 0}
-  andarEsquerda: {fileID: 0}
-  andarDireita: {fileID: 0}
-  paradoCostas: {fileID: 0}
-  paradoFrente: {fileID: 0}
-  paradoEsquerda: {fileID: 0}
-  paradoDireita: {fileID: 0}
 --- !u!1 &732668615
 GameObject:
   m_ObjectHideFlags: 0
@@ -8518,14 +8502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
-  andarCima: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  andarBaixo: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  andarEsquerda: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  andarDireita: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  paradoCostas: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  paradoFrente: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  paradoEsquerda: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
-  paradoDireita: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
 --- !u!1 &841204412
 GameObject:
   m_ObjectHideFlags: 0
@@ -8943,7 +8919,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.082406
+  orthographic size: 2.992848
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8968,7 +8944,7 @@ Transform:
   m_GameObject: {fileID: 1173312574}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.75, z: -10}
+  m_LocalPosition: {x: 0, y: -0.57, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8988,8 +8964,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
   smoothSpeed: 1
-  minCameraBounds: {x: -0.09, y: -0.53, z: 0}
-  maxCameraBounds: {x: -0.09, y: -0.53, z: 0}
+  minCameraBounds: {x: 0, y: -0.53, z: 0}
+  maxCameraBounds: {x: 0, y: -0.53, z: 0}
 --- !u!1 &1226330351
 GameObject:
   m_ObjectHideFlags: 0
@@ -9069,7 +9045,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: d08c2fb828e3497429cb673910965af1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: bc806c3b36bbcf74297453c2cc17768b, type: 2}
 --- !u!1 &1241014220
 GameObject:
   m_ObjectHideFlags: 0
@@ -9708,7 +9684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2040748212
 Transform:
   m_ObjectHideFlags: 0

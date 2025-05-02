@@ -7514,10 +7514,10 @@ MonoBehaviour:
   moveLeftKey: 97
   moveRightKey: 100
   moveSpeed: 35
-  boundXEsquerda: -6.640564
+  boundXEsquerda: -6.678032
   boundXDireita: 6.514736
-  boundYBaixo: -3.190501
-  boundYCima: 2.134892
+  boundYBaixo: -3.100172
+  boundYCima: 2.066446
   andarCima: {fileID: 9100000, guid: b6c377b2ea2cf5d44ade3abf112cbc35, type: 2}
   andarBaixo: {fileID: 9100000, guid: 9196e18e9fe1e804497710eca0ee5590, type: 2}
   andarEsquerda: {fileID: 9100000, guid: 4eb6622775425d84191349b3e7a66233, type: 2}
@@ -7608,7 +7608,7 @@ Transform:
   m_GameObject: {fileID: 679315463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -3.04, z: 0}
+  m_LocalPosition: {x: 0.02, y: -2.65, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7826,7 +7826,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.0827308
+  orthographic size: 2.992848
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

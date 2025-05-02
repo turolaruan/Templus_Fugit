@@ -7493,15 +7493,15 @@ MonoBehaviour:
   boundXEsquerda: -6.678032
   boundXDireita: 5.694397
   boundYBaixo: -2.476458
-  boundYCima: 2.223252
-  andarCima: {fileID: 0}
-  andarBaixo: {fileID: 0}
-  andarEsquerda: {fileID: 0}
-  andarDireita: {fileID: 0}
-  paradoCostas: {fileID: 0}
-  paradoFrente: {fileID: 0}
-  paradoEsquerda: {fileID: 0}
-  paradoDireita: {fileID: 0}
+  boundYCima: 2.003242
+  andarCima: {fileID: 9100000, guid: b6c377b2ea2cf5d44ade3abf112cbc35, type: 2}
+  andarBaixo: {fileID: 9100000, guid: 9196e18e9fe1e804497710eca0ee5590, type: 2}
+  andarEsquerda: {fileID: 9100000, guid: 4eb6622775425d84191349b3e7a66233, type: 2}
+  andarDireita: {fileID: 9100000, guid: a8165fbd11f164241a74f7322560ded5, type: 2}
+  paradoCostas: {fileID: 9100000, guid: ba5817ba053cb8f458e9780e312691eb, type: 2}
+  paradoFrente: {fileID: 9100000, guid: 7a741dbc8c6f5f34eb736aff3f629daf, type: 2}
+  paradoEsquerda: {fileID: 9100000, guid: 0632cb0f475d56849b9100ada5dac7fb, type: 2}
+  paradoDireita: {fileID: 9100000, guid: 1dad070368fdfd14d90f092146e29332, type: 2}
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -7802,7 +7802,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.0725954
+  orthographic size: 2.992848
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
