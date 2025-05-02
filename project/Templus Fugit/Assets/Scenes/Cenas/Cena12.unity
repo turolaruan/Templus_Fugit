@@ -7374,7 +7374,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.21474507
-  m_Speed: 2
+  m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -7399,6 +7399,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
+  andarCima: {fileID: 0}
+  andarBaixo: {fileID: 0}
+  andarEsquerda: {fileID: 0}
+  andarDireita: {fileID: 0}
+  paradoCostas: {fileID: 0}
+  paradoFrente: {fileID: 0}
+  paradoEsquerda: {fileID: 0}
+  paradoDireita: {fileID: 0}
 --- !u!1 &502994296
 GameObject:
   m_ObjectHideFlags: 0
@@ -7849,6 +7857,14 @@ MonoBehaviour:
   boundXDireita: 5.64
   boundYBaixo: -3.354688
   boundYCima: 2.223252
+  andarCima: {fileID: 0}
+  andarBaixo: {fileID: 0}
+  andarEsquerda: {fileID: 0}
+  andarDireita: {fileID: 0}
+  paradoCostas: {fileID: 0}
+  paradoFrente: {fileID: 0}
+  paradoEsquerda: {fileID: 0}
+  paradoDireita: {fileID: 0}
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -8148,7 +8164,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 2
+  m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -8173,6 +8189,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
+  andarCima: {fileID: 0}
+  andarBaixo: {fileID: 0}
+  andarEsquerda: {fileID: 0}
+  andarDireita: {fileID: 0}
+  paradoCostas: {fileID: 0}
+  paradoFrente: {fileID: 0}
+  paradoEsquerda: {fileID: 0}
+  paradoDireita: {fileID: 0}
 --- !u!1 &732668615
 GameObject:
   m_ObjectHideFlags: 0
@@ -8469,7 +8493,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.21474501
-  m_Speed: 2
+  m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -8494,6 +8518,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 679315467}
+  andarCima: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  andarBaixo: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  andarEsquerda: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  andarDireita: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  paradoCostas: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  paradoFrente: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  paradoEsquerda: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
+  paradoDireita: {fileID: 9100000, guid: a08fc71a87fe29047b93017ed22c5817, type: 2}
 --- !u!1 &841204412
 GameObject:
   m_ObjectHideFlags: 0
@@ -8911,7 +8943,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.2863305
+  orthographic size: 3.082406
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
