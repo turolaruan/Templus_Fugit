@@ -13954,6 +13954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: f14494d8ac372224787d94ea0e479745, type: 2}
+  gameTime: 300
 --- !u!4 &545912325
 Transform:
   m_ObjectHideFlags: 0
@@ -14389,7 +14390,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.6021883
+  orthographic size: 3.869327
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14877,11 +14878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.62337285
+      value: -0.61
       objectReference: {fileID: 0}
     - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7553967
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
       propertyPath: m_LocalPosition.z

@@ -7,9 +7,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; // Singleton instance
     public static int PlayerScore1 = 0; // Pontuação do player 1
-    public GUISkin layout;              // Fonte do placar
+    public GUISkin layout;              // Fonte do contador de tempo
     public static int lifes = 3;        // Vidas do jogador
     public static GameObject thePlayer; // Referência ao objeto jogador
+
+    public float gameTime = 300f;        // Tempo total do jogo em segundos
+    private float currentTime;          // Tempo restante
 
     // Dicionário para armazenar a última posição do jogador em cada cena
     private Dictionary<string, Vector3?> savedPositions = new Dictionary<string, Vector3?>();
@@ -65,7 +68,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (currentTime == 0) // Inicializa o tempo apenas na primeira cena
+        {
+            currentTime = gameTime;
+        }
         thePlayer = GameObject.FindGameObjectWithTag("Player"); // Busca a referência do jogador
+        currentTime = gameTime; // Inicializa o tempo restante
         DrawLifes();
         PositionPlayerOnSceneLoad();
     }
@@ -269,6 +277,19 @@ public class GameManager : MonoBehaviour
 
         DrawLifes();
 
+        // Verifica se a cena atual é "Cena2" ou posterior antes de atualizar o tempo
+        if (SceneManager.GetActiveScene().name == "Cena2" || IsSceneAfter("Cena2"))
+        {
+            // Atualiza o tempo restante
+            currentTime -= Time.deltaTime;
+
+            // Reinicia o jogo se o tempo chegar a 0
+            if (currentTime <= 0)
+            {
+                RestartGame();
+            }
+        }
+
         // Salva a posição do jogador antes de trocar de cena
         Vector2 playerPosition = thePlayer.transform.position;
         if (SceneManager.GetActiveScene().name == "Cena1")
@@ -470,8 +491,15 @@ public class GameManager : MonoBehaviour
     // Gerência da pontuação e fluxo do jogo
     void OnGUI()
     {
+        // Define a cor do texto no GUISkin
+        layout.label.normal.textColor = Color.white; // Altere para a cor desejada
+
         GUI.skin = layout;
-        GUI.Label(new Rect(Screen.width / 2, 2, 200, 200), "" + PlayerScore1);
+
+        // Exibe o tempo restante no formato "0s"
+        string timeText = Mathf.FloorToInt(currentTime).ToString();
+
+        GUI.Label(new Rect(1100, 10, 100, 50), timeText);
     }
 
     public void GameOver()
@@ -484,13 +512,38 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        lifes = 3; // Reset lifes only when restarting the entire game
-        PlayerScore1 = 0;
+        lifes = 3; // Reset vidas ao reiniciar o jogo
+        currentTime = gameTime; // Reinicia o tempo
         savedPositions.Clear(); // Limpa todas as posições salvas
+        SceneManager.LoadScene("Cena2"); // Reinicia na cena inicial
     }
 
-    public void AddScore()
+    private bool IsSceneAfter(string sceneName)
     {
-        PlayerScore1 += 1;
+        // Lista de cenas em ordem
+        List<string> sceneOrder = new List<string>
+        {
+            "Cena1",
+            "Cena2",
+            "Cena3",
+            "Cena4",
+            "Cena5",
+            "Cena6",
+            "Cena7",
+            "Cena8",
+            "Cena9",
+            "Cena10",
+            "Cena11",
+            "Cena12",
+            "Cena13",
+            "Cena14",
+            "Cena15",
+            "Cena16_Boss"
+        };
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        // Verifica se a cena atual está depois da "Cena2"
+        return sceneOrder.IndexOf(currentScene) > sceneOrder.IndexOf(sceneName);
     }
 }
