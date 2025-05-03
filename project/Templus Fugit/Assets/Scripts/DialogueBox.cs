@@ -21,7 +21,7 @@ public class DialogueBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetKeyDown(KeyCode.Space)){
             if(textComponent.text == lines[index]){
                 NextLine();
             }else{
@@ -31,7 +31,7 @@ public class DialogueBox : MonoBehaviour
         }
     }
 
-    void StartDialog(){
+    public void StartDialog(){
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -52,6 +52,4 @@ public class DialogueBox : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
-
 }
