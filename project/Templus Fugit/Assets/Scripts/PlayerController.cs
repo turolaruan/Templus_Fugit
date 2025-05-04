@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d; // Define o corpo rígido 2D que representa o player
     private Animator animator; // Define o componente Animator
     private Vector2 movement; // Define o vetor de movimento do player
+    private bool canMove = true; // Controla se o jogador pode se mover
 
     public RuntimeAnimatorController andarCima; // Define o animator controller para quando pressionar a tecla W
     public RuntimeAnimatorController andarBaixo; // Define o animator controller para quando pressionar a tecla S
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) return; // Impede a movimentação se canMove for falso
+
         Vector2 movement = Vector2.zero;
 
         if (Input.GetKey(moveUpKey))
@@ -88,5 +91,10 @@ public class PlayerController : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, boundYBaixo, boundYCima);
 
         rb2d.MovePosition(newPosition);
+    }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
     }
 }

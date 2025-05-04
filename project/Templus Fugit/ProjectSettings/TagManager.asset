@@ -9,6 +9,8 @@ TagManager:
   - Paddle
   - Border
   - Enemy
+  - Interactable
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - Ground
   - Backgrounds
   - Obstacles
+  - PuzzleSequencia
   - Player
-  - 
-  - 
+  - IgnorePlayer
   - 
   - 
   - 
@@ -52,11 +54,17 @@ TagManager:
   - name: Background
     uniqueID: 4140734151
     locked: 0
+  - name: Foreground
+    uniqueID: 2712781965
+    locked: 0
   - name: Obstacle
     uniqueID: 3986783385
     locked: 0
   - name: fragmento
     uniqueID: 3295202613
+    locked: 0
+  - name: Portas
+    uniqueID: 2337209937
     locked: 0
   - name: Player
     uniqueID: 2875074227

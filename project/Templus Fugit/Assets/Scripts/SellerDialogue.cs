@@ -19,11 +19,11 @@ public class SellerDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !isDialogueActive)
+        if (Input.GetKeyDown(KeyCode.E) && !isDialogueActive)
         {
             ShowDialogue();
         }
-        else if (isDialogueActive && Input.GetKeyDown(KeyCode.F))
+        else if (isDialogueActive && Input.GetKeyDown(KeyCode.E))
         {
             CloseDialogue();
         }

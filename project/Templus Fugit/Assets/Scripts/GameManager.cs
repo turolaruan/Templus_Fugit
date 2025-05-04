@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     // Variável para armazenar a cena anterior
     private string previousScene = null;
 
+    private bool isInteracting = false; // Verifica se o jogador está interagindo com algo
+
     void Awake()
     {
         // Implement the singleton pattern
@@ -68,15 +70,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (currentTime == 0) // Inicializa o tempo apenas na primeira cena
-        {
-            currentTime = gameTime;
-        }
-        thePlayer = GameObject.FindGameObjectWithTag("Player"); // Busca a referência do jogador
-        currentTime = gameTime; // Inicializa o tempo restante
+        if (currentTime <= 0) currentTime = gameTime;
+        thePlayer = GameObject.FindGameObjectWithTag("Player");
         DrawLifes();
         PositionPlayerOnSceneLoad();
-    }
+    }   
 
     public void LoseLife()
     {
@@ -97,28 +95,16 @@ public class GameManager : MonoBehaviour
 
     public static void DrawLifes()
     {
-        if (lifes == 2)
+        for (int i = 0; i < 3; i++)
         {
-            GameObject heart0 = GameObject.Find("Heart0");
-            heart0.GetComponent<SpriteRenderer>().enabled = false;
-        }
-        else if (lifes == 1)
-        {
-            GameObject heart0 = GameObject.Find("Heart0");
-            heart0.GetComponent<SpriteRenderer>().enabled = false;
-            GameObject heart1 = GameObject.Find("Heart1");
-            heart1.GetComponent<SpriteRenderer>().enabled = false;
-        }
-        else if (lifes == 0)
-        {
-            GameObject heart0 = GameObject.Find("Heart0");
-            heart0.GetComponent<SpriteRenderer>().enabled = false;
-            GameObject heart1 = GameObject.Find("Heart1");
-            heart1.GetComponent<SpriteRenderer>().enabled = false;
-            GameObject heart2 = GameObject.Find("Heart2");
-            heart2.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject heart = GameObject.Find($"Heart{i}");
+            if (heart != null)
+            {
+                heart.GetComponent<SpriteRenderer>().enabled = i < lifes;
+            }
         }
     }
+
 
     // Salva a posição atual do jogador no dicionário
     private void SavePlayerPosition()
@@ -266,6 +252,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Impede a transição de cena enquanto o jogador está interagindo
+        if (isInteracting) return;
+
         if (thePlayer == null)
         {
             thePlayer = GameObject.FindGameObjectWithTag("Player");
@@ -340,7 +329,7 @@ public class GameManager : MonoBehaviour
 
         else if (SceneManager.GetActiveScene().name == "Cena5")
         {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.100172f))
+            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.702741f))
             {
                 SavePlayerPosition();
                 SceneManager.LoadScene("Cena2");
@@ -491,15 +480,27 @@ public class GameManager : MonoBehaviour
     // Gerência da pontuação e fluxo do jogo
     void OnGUI()
     {
+        // Verifica se a cena atual é "Cena1"
+        if (SceneManager.GetActiveScene().name == "Cena1")
+        {
+            return; // Não exibe o timer na Cena1
+        }
+
         // Define a cor do texto no GUISkin
         layout.label.normal.textColor = Color.white; // Altere para a cor desejada
 
         GUI.skin = layout;
 
         // Exibe o tempo restante no formato "0s"
-        string timeText = Mathf.FloorToInt(currentTime).ToString();
+        string timeText = Mathf.FloorToInt(currentTime).ToString() + "s";
 
-        GUI.Label(new Rect(1100, 10, 100, 50), timeText);
+        // Define a posição no canto superior direito
+        float labelWidth = 100f; // Largura do texto
+        float labelHeight = 50f; // Altura do texto
+        float xPosition = Screen.width - labelWidth - 10f; // 10px de margem da borda direita
+        float yPosition = 10f; // 10px de margem do topo
+
+        GUI.Label(new Rect(xPosition, yPosition, labelWidth, labelHeight), timeText);
     }
 
     public void GameOver()
@@ -545,5 +546,21 @@ public class GameManager : MonoBehaviour
 
         // Verifica se a cena atual está depois da "Cena2"
         return sceneOrder.IndexOf(currentScene) > sceneOrder.IndexOf(sceneName);
+    }
+
+    public void ReduceTime(float penalty)
+    {
+        currentTime -= penalty; // Subtrai o tempo de penalidade
+        if (currentTime < 0)
+        {
+            currentTime = 0; // Garante que o tempo não fique negativo
+            RestartGame(); // Reinicia o jogo se o tempo acabar
+        }
+    }
+
+    public void SetInteracting(bool interacting)
+    {
+        isInteracting = interacting;
+        Debug.Log($"isInteracting: {isInteracting}");
     }
 }
