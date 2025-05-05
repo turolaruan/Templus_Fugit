@@ -14,35 +14,73 @@ public class PlayerController : MonoBehaviour
     public float boundYBaixo = -2.997569f; // Define os limites em Y
     public float boundYCima = 35.39562f; // Define os limites em Y
 
-    private Rigidbody2D rb2d; // Define o corpo rigido 2D que representa o player
+    private Rigidbody2D rb2d; // Define o corpo rígido 2D que representa o player
+    private Animator animator; // Define o componente Animator
     private Vector2 movement; // Define o vetor de movimento do player
+    private bool canMove = true; // Controla se o jogador pode se mover
+
+    public RuntimeAnimatorController andarCima; // Define o animator controller para quando pressionar a tecla W
+    public RuntimeAnimatorController andarBaixo; // Define o animator controller para quando pressionar a tecla S
+    public RuntimeAnimatorController andarEsquerda; // Define o animator controller para quando pressionar a tecla A
+    public RuntimeAnimatorController andarDireita; // Define o animator controller para quando pressionar a tecla D
+    public RuntimeAnimatorController paradoCostas; // Define o animator controller para quando soltar a tecla W
+    public RuntimeAnimatorController paradoFrente; // Define o animator controller para quando soltar a tecla S
+    public RuntimeAnimatorController paradoEsquerda; // Define o animator controller para quando soltar a tecla A
+    public RuntimeAnimatorController paradoDireita; // Define o animator controller para quando soltar a tecla D
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>(); // Inicializa o player
+        animator = GetComponentInChildren<Animator>(); // Inicializa o animator
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) return; // Impede a movimentação se canMove for falso
+
         Vector2 movement = Vector2.zero;
 
         if (Input.GetKey(moveUpKey))
         {
             movement.y += 1;
+            animator.runtimeAnimatorController = andarCima; // Troca para a animação de andar para cima
         }
-        if (Input.GetKey(moveDownKey))
+        else if (Input.GetKey(moveDownKey))
         {
             movement.y -= 1;
+            animator.runtimeAnimatorController = andarBaixo; // Troca para a animação de andar para baixo
         }
-        if (Input.GetKey(moveLeftKey))
+        else if (Input.GetKey(moveLeftKey))
         {
             movement.x -= 1;
+            animator.runtimeAnimatorController = andarEsquerda; // Troca para a animação de andar para a esquerda
         }
-        if (Input.GetKey(moveRightKey))
+        else if (Input.GetKey(moveRightKey))
         {
             movement.x += 1;
+            animator.runtimeAnimatorController = andarDireita; // Troca para a animação de andar para a direita
+        }
+        else
+        {
+            // Define animações de parado com base na última direção
+            if (animator.runtimeAnimatorController == andarCima)
+            {
+                animator.runtimeAnimatorController = paradoCostas;
+            }
+            else if (animator.runtimeAnimatorController == andarBaixo)
+            {
+                animator.runtimeAnimatorController = paradoFrente;
+            }
+            else if (animator.runtimeAnimatorController == andarEsquerda)
+            {
+                animator.runtimeAnimatorController = paradoEsquerda;
+            }
+            else if (animator.runtimeAnimatorController == andarDireita)
+            {
+                animator.runtimeAnimatorController = paradoDireita;
+            }
         }
 
         movement = movement.normalized * moveSpeed * Time.deltaTime;
@@ -53,5 +91,10 @@ public class PlayerController : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, boundYBaixo, boundYCima);
 
         rb2d.MovePosition(newPosition);
+    }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
     }
 }

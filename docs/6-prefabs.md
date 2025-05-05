@@ -123,12 +123,12 @@
 - **Componentes:**
   - **Sprites:** Suzan frente (`suzan4.png`),Suzan parada (`suzan3.png`), Suzan andando (`suzan1.png`, `suzan2.png`)
       - frente
-        ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan4.jpg)
+        ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan4.png)
       - Parada
-        ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan3.jpg)
+        ![suzanparada](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan3.png)
       - Andando
-        ![suzanandando1](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan1.jpg)
-        ![suzanandando2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan2.jpg)
+        ![suzanandando1](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan1.png)
+        ![suzanandando2](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/suzan2.png)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `None`
   - **Scripts:**
@@ -142,7 +142,7 @@
 - **Quando é utilizado:** Dentro da loja acessível no templo.
 - **Componentes:**
   - **Sprite:** `vendedor_loja.png`
-        ![vendedor](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/vendedor%20loja.jpg)
+        ![vendedor](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/vendedor-loja.png)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `None`
   - **Scripts:**
@@ -157,7 +157,7 @@
 - **Quando é utilizado:** Durante combates ou puzzles que exigem rapidez.
 - **Componentes:**
   - **Sprite:** `relogio_quebrado.png`
-        ![relogio](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/relogio_quebrado.jpg)
+        ![relogio](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/relogio_quebrado.png)
   - **Colisor:** `None` 
   - **Fonte de Áudio:** `None`
   - **Scripts:**
@@ -171,7 +171,7 @@
 - **Quando é utilizado:** Equipado após compra.
 - **Componentes:**
   - **Sprite:** `veu_nyx.png`
-        ![veu](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/V%C3%A9u_de_Nyx.jpg)
+        ![veu](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/V%C3%A9u_de_Nyx.png)
   - **Colisor:** `None`
   - **Fonte de Áudio:** `None`
   - **Scripts:**
@@ -185,7 +185,7 @@
 - **Quando é utilizado:** Espalhado pelo mapa como recompensa de exploração.
 - **Componentes:**
   - **Sprite:** `bau_fechado.png`
-        ![bau](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/bau.jpg)
+        ![bau](https://github.com/LucasRezendeSimoes/Templus_Fugit/blob/main/project/images/bau.png)
   - **Colisor:** `BoxCollider2D`
   - **Fonte de Áudio:** `chest_open.mp3`
   - **Scripts:**
