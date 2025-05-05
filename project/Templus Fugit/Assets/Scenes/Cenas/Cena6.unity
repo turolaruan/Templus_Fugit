@@ -7911,7 +7911,6 @@ MonoBehaviour:
   boundXDireita: 5.73647
   boundYBaixo: -3.11787
   boundYCima: 2.016829
-  canMove: 1
   andarCima: {fileID: 9100000, guid: b6c377b2ea2cf5d44ade3abf112cbc35, type: 2}
   andarBaixo: {fileID: 9100000, guid: 9196e18e9fe1e804497710eca0ee5590, type: 2}
   andarEsquerda: {fileID: 9100000, guid: 4eb6622775425d84191349b3e7a66233, type: 2}
@@ -8982,7 +8981,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.827548
+  orthographic size: 3.935404
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

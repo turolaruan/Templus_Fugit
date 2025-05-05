@@ -9139,6 +9139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: f14494d8ac372224787d94ea0e479745, type: 2}
+  gameTime: 300
 --- !u!4 &545912325
 Transform:
   m_ObjectHideFlags: 0
@@ -9228,7 +9229,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -308183911
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -9344,6 +9345,14 @@ MonoBehaviour:
   boundXDireita: 7.458932
   boundYBaixo: -3.445987
   boundYCima: 15.45241
+  andarCima: {fileID: 0}
+  andarBaixo: {fileID: 0}
+  andarEsquerda: {fileID: 0}
+  andarDireita: {fileID: 0}
+  paradoCostas: {fileID: 0}
+  paradoFrente: {fileID: 0}
+  paradoEsquerda: {fileID: 0}
+  paradoDireita: {fileID: 0}
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -9644,7 +9653,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.25
+  orthographic size: 3.935404
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9900,7 +9909,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1419893069
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -3647626148071368089, guid: 70ef14dabb03e294c82fa885dd2c7f19, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
