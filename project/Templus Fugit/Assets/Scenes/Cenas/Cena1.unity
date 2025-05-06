@@ -13748,7 +13748,7 @@ GameObject:
   - component: {fileID: 455350619}
   - component: {fileID: 455350618}
   - component: {fileID: 455350617}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Canvas2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14120,6 +14120,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &586043040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2146656431836842205, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+  m_PrefabInstance: {fileID: 4285409598200540960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &679315463
 GameObject:
   m_ObjectHideFlags: 0
@@ -14132,7 +14137,7 @@ GameObject:
   - component: {fileID: 679315466}
   - component: {fileID: 679315465}
   - component: {fileID: 679315464}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -14155,7 +14160,12 @@ MonoBehaviour:
   moveDownKey: 115
   moveLeftKey: 97
   moveRightKey: 100
+  interactKey: 101
   moveSpeed: 35
+  interactionRange: 2
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   boundXEsquerda: -7.458932
   boundXDireita: 7.458932
   boundYBaixo: -2.997569
@@ -14390,7 +14400,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.500563
+  orthographic size: 4.402727
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14461,7 +14471,7 @@ GameObject:
   - component: {fileID: 1421577636}
   - component: {fileID: 1421577635}
   - component: {fileID: 1421577634}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: DialogueBox2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14555,7 +14565,7 @@ GameObject:
   - component: {fileID: 1427611816}
   - component: {fileID: 1427611815}
   - component: {fileID: 1427611814}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Text (TMP)2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14691,7 +14701,7 @@ GameObject:
   - component: {fileID: 1489537035}
   - component: {fileID: 1489537037}
   - component: {fileID: 1489537036}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19523,7 +19533,7 @@ GameObject:
   - component: {fileID: 1732768988}
   - component: {fileID: 1732768989}
   - component: {fileID: 1732768990}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19646,8 +19656,16 @@ PrefabInstance:
       value: Vendedor
       objectReference: {fileID: 0}
     - target: {fileID: 3583683027239627398, guid: c6b81ad875c39294398895aea0f99282, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583683027239627398, guid: c6b81ad875c39294398895aea0f99282, type: 3}
       propertyPath: m_TagString
       value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4701529660589962854, guid: c6b81ad875c39294398895aea0f99282, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9035858927630094182, guid: c6b81ad875c39294398895aea0f99282, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19768,10 +19786,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1140228888707107408, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146656431836842205, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2946545246411376713, guid: 94fae3a794484554ca09a3038be10634, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1173312576}
+    - target: {fileID: 5233397836795695357, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276635250535162787, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7051896599117041260, guid: 94fae3a794484554ca09a3038be10634, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.44
@@ -19815,6 +19849,22 @@ PrefabInstance:
     - target: {fileID: 7094747614359507480, guid: 94fae3a794484554ca09a3038be10634, type: 3}
       propertyPath: m_Name
       value: FragmentoMemoria
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094747614359507480, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383131714480364721, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1173312576}
+    - target: {fileID: 7383131714480364721, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: dialogueBox
+      value: 
+      objectReference: {fileID: 586043040}
+    - target: {fileID: 7383131714480364721, guid: 94fae3a794484554ca09a3038be10634, type: 3}
+      propertyPath: lines.Array.size
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

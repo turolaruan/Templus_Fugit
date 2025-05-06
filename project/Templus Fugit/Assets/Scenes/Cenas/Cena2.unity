@@ -9083,7 +9083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 520695502}
   - component: {fileID: 520695503}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9453,7 +9453,7 @@ GameObject:
   - component: {fileID: 679315466}
   - component: {fileID: 679315465}
   - component: {fileID: 679315464}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -10069,7 +10069,7 @@ GameObject:
   - component: {fileID: 1732768988}
   - component: {fileID: 1732768989}
   - component: {fileID: 1732768990}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

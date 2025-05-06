@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq; // Para usar métodos como OrderBy
 
 public class PuzzleSequenceManager : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class PuzzleSequenceManager : MonoBehaviour
     public GameManager gameManager;               // Referência ao sistema de tempo
     private bool puzzleCompleted = false;
 
-    public PlayerController playerController;         // Referência ao script de movimento do jogador
+    public PlayerController playerController;     // Referência ao script de movimento do jogador
+
+    public int difficultyLevel = 1;               // Nível de dificuldade (1 = fácil, aumenta com o tempo)
 
     void Start()
     {
+        GenerateRandomSequence(5 * difficultyLevel); // Gera uma sequência baseada na dificuldade
         UpdateSequenceText();
 
         // Travar o movimento do jogador ao iniciar o puzzle
@@ -102,5 +106,20 @@ public class PuzzleSequenceManager : MonoBehaviour
 
         // Destruir o objeto atual (o que contém o script)
         Destroy(gameObject);
+    }
+
+    void GenerateRandomSequence(int length)
+    {
+        // Lista de teclas possíveis
+        KeyCode[] possibleKeys = {
+            KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E,
+            KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J,
+            KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N, KeyCode.O,
+            KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T,
+            KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z
+        };
+
+        // Embaralha e seleciona as primeiras 'length' teclas
+        sequence = possibleKeys.OrderBy(x => Random.value).Take(length).ToList();
     }
 }

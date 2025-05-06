@@ -4798,7 +4798,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -999764683
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5177,8 +5177,8 @@ GameObject:
   - component: {fileID: 7051896599117041260}
   - component: {fileID: 7586831063840832388}
   - component: {fileID: 7530881582186309876}
-  - component: {fileID: 2946545246411376713}
   - component: {fileID: 3928093602282803965}
+  - component: {fileID: 7383131714480364721}
   m_Layer: 0
   m_Name: FragmentoMemoria
   m_TagString: Interactable
@@ -5244,7 +5244,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -999764683
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: -5351293859393930968, guid: 4b71a27f004b16f449ebae0d09b72d85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5303,20 +5303,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.33, y: 8.15}
   m_EdgeRadius: 0
---- !u!114 &2946545246411376713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7094747614359507480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aed741dd6b927124fb535e9cd651368a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 2146656431836842205}
-  mainCamera: {fileID: 0}
 --- !u!114 &3928093602282803965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5331,3 +5317,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.2
   frequency: 1
+--- !u!114 &7383131714480364721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094747614359507480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed741dd6b927124fb535e9cd651368a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 0}
+  mainCamera: {fileID: 0}

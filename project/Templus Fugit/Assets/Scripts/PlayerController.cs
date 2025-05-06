@@ -8,7 +8,11 @@ public class PlayerController : MonoBehaviour
     public KeyCode moveDownKey = KeyCode.S; // Move o player pra baixo
     public KeyCode moveLeftKey = KeyCode.A; // Move o player pra esquerda
     public KeyCode moveRightKey = KeyCode.D; // Move o player pra direita
+    public KeyCode interactKey = KeyCode.E; // Botão de interação
     public float moveSpeed = 5f; // Velocidade de movimento do player
+    public float interactionRange = 2f; // Distância máxima para interagir com objetos
+    public LayerMask interactableLayer; // Camada dos objetos interativos
+
     public float boundXEsquerda = -7.458932f; // Define os limites em X
     public float boundXDireita = 7.458932f; // Define os limites em X
     public float boundYBaixo = -2.997569f; // Define os limites em Y
@@ -40,6 +44,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!canMove) return; // Impede a movimentação se canMove for falso
 
+        HandleMovement();
+        HandleInteraction();
+    }
+
+    void HandleMovement()
+    {
         Vector2 movement = Vector2.zero;
 
         if (Input.GetKey(moveUpKey))
@@ -93,8 +103,35 @@ public class PlayerController : MonoBehaviour
         rb2d.MovePosition(newPosition);
     }
 
+    void HandleInteraction()
+    {
+        if (Input.GetKeyDown(interactKey))
+        {
+            // Detecta todos os objetos interativos dentro do alcance
+            Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, interactionRange, interactableLayer);
+
+            foreach (Collider2D interactable in interactables)
+            {
+                // Verifica se o objeto possui o componente que implementa IInteractable
+                IInteractable interactableObject = interactable.GetComponent<IInteractable>();
+                if (interactableObject != null)
+                {
+                    interactableObject.Interact(); // Chama o método Interact
+                    return; // Interrompe após interagir com o primeiro objeto
+                }
+            }
+        }
+    }
+
     public void SetCanMove(bool value)
     {
         canMove = value;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Desenha o alcance de interação no editor
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, interactionRange);
     }
 }

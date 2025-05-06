@@ -8149,7 +8149,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.935404
+  orthographic size: 3.851545
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8867,6 +8867,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1555096402852711252, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555096402852711252, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 5728495640216990608, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
       propertyPath: m_Name
       value: Puzzle
@@ -8876,9 +8884,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 545912324}
     - target: {fileID: 6237824800511185066, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
+      propertyPath: difficultyLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6237824800511185066, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 679315464}
+    - target: {fileID: 7194593850667391532, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8679161620137453751, guid: 6915ff9f785566a46855b6bd93d0ca5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5476258

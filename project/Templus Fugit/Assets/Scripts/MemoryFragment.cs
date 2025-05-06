@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryFragment : MonoBehaviour
+public class MemoryFragment : MonoBehaviour, IInteractable
 {
     public GameObject dialogueBox; // Referência ao objeto do diálogo
     public Camera mainCamera; // Referência à câmera principal
-    private bool isPlayerNearby = false; // Verifica se o jogador está próximo
     private bool isDialogueActive = false; // Verifica se o diálogo está ativo
+    private Coroutine cameraShakeCoroutine; // Referência para o tremor da câmera
 
-    // Start is called before the first frame update
+    // Start é chamado antes do primeiro frame update
     void Start()
     {
         dialogueBox.SetActive(false); // Garante que a caixa de diálogo esteja desativada no início
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Interact()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.F) && !isDialogueActive)
+        if (!isDialogueActive)
         {
             ShowDialogue();
         }
-        else if (isDialogueActive && Input.GetKeyDown(KeyCode.F))
+        else
         {
             CloseDialogue();
         }
@@ -46,7 +45,7 @@ public class MemoryFragment : MonoBehaviour
             CameraShake cameraShake = mainCamera.GetComponent<CameraShake>();
             if (cameraShake != null)
             {
-                StartCoroutine(cameraShake.Shake(12f, 0.1f)); // Duração de 5s e magnitude de 10
+                cameraShakeCoroutine = StartCoroutine(cameraShake.ShakeContinuous(0.1f)); // Tremor contínuo
             }
         }
     }
@@ -55,22 +54,19 @@ public class MemoryFragment : MonoBehaviour
     {
         dialogueBox.SetActive(false); // Desativa a caixa de diálogo
         isDialogueActive = false;
-        gameObject.SetActive(false); // Desativa o fragmento de memória
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        // Para o tremor da câmera
+        if (cameraShakeCoroutine != null && mainCamera != null)
         {
-            isPlayerNearby = true; // Detecta que o jogador está próximo
+            CameraShake cameraShake = mainCamera.GetComponent<CameraShake>();
+            if (cameraShake != null)
+            {
+                StopCoroutine(cameraShakeCoroutine); // Para o tremor contínuo
+                cameraShake.StopShake(); // Garante que o tremor pare
+            }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            isPlayerNearby = false; // Detecta que o jogador saiu da área
-        }
+        // Destroi o fragmento de memória
+        Destroy(gameObject);
     }
 }

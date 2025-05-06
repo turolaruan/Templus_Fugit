@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    private bool isShaking = false;
+
     public IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPosition = transform.localPosition;
@@ -11,10 +13,10 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float offsetX = Random.Range(-1f, 1f) * magnitude;
-            float offsetY = Random.Range(-1f, 1f) * magnitude;
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition = new Vector3(originalPosition.x + offsetX, originalPosition.y + offsetY, originalPosition.z);
+            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
 
             elapsed += Time.deltaTime;
 
@@ -22,5 +24,28 @@ public class CameraShake : MonoBehaviour
         }
 
         transform.localPosition = originalPosition;
+    }
+
+    public IEnumerator ShakeContinuous(float magnitude)
+    {
+        isShaking = true;
+        Vector3 originalPosition = transform.localPosition;
+
+        while (isShaking)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+
+            yield return null;
+        }
+
+        transform.localPosition = originalPosition;
+    }
+
+    public void StopShake()
+    {
+        isShaking = false;
     }
 }
