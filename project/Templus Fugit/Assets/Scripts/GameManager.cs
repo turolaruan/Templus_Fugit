@@ -22,6 +22,45 @@ public class GameManager : MonoBehaviour
 
     private bool isInteracting = false; // Verifica se o jogador está interagindo com algo
 
+    private readonly Dictionary<(string from, string to), Vector3> sceneTransitions = new Dictionary<(string, string), Vector3>
+    {
+        { ("Cena3", "Cena2"), new Vector3(-6.042691f, 8.385761f, 0f) },
+        { ("Cena2", "Cena3"), new Vector3(6.16f, -1.6f, 0f) },
+        { ("Cena4", "Cena2"), new Vector3(5.78788f, 8.521598f, 0f) },
+        { ("Cena2", "Cena4"), new Vector3(-6.16f, -1.03f, 0f) },
+        { ("Cena5", "Cena2"), new Vector3(-0.08580431f, 14.966f, 0f) },
+        { ("Cena2", "Cena5"), new Vector3(0.02f, -2.710258f, 0f) },
+        { ("Cena10", "Cena5"), new Vector3(-6.265987f, -0.5999068f, 0f) },
+        { ("Cena5", "Cena10"), new Vector3(6.02f, -0.66f, 0f) },
+        { ("Cena9", "Cena5"), new Vector3(6.159083f, -0.532959f, 0f) },
+        { ("Cena5", "Cena9"), new Vector3(-6.272023f, -0.66f, 0f) },
+        { ("Cena6", "Cena5"), new Vector3(0.02f, 1.730677f, 0f) },
+        { ("Cena5", "Cena6"), new Vector3(0.02f, -2.7f, 0f) },
+        { ("Cena15", "Cena6"), new Vector3(0.02f, 1.730677f, 0f) },
+        { ("Cena6", "Cena15"), new Vector3(0.02f, -2.7f, 0f) },
+        { ("Cena11", "Cena10"), new Vector3(0.02f, 1.730677f, 0f) },
+        { ("Cena10", "Cena11"), new Vector3(0.02f, -2.7f, 0f) },
+        { ("Cena12", "Cena9"), new Vector3(0.02f, 1.730677f, 0f) },
+        { ("Cena9", "Cena12"), new Vector3(0.02f, -2.7f, 0f) },
+        { ("Cena13", "Cena11"), new Vector3(0.02f, 1.730677f, 0f) },
+        { ("Cena11", "Cena13"), new Vector3(0.02f, -2.7f, 0f) },
+        { ("Cena14", "Cena12"), new Vector3(0.02f, 1.730677f, 0f) },
+        { ("Cena12", "Cena14"), new Vector3(0.02f, -2.7f, 0f) },
+        { ("Cena15", "Cena13"), new Vector3(6.105287f, -0.4260389f, 0f) },
+        { ("Cena13", "Cena15"), new Vector3(-5.948434f, -0.519862f, 0f) },
+        { ("Cena14", "Cena15"), new Vector3(5.942899f, -0.4849414f, 0f) },
+        { ("Cena15", "Cena14"), new Vector3(-6.119143f, -0.6036257f, 0f) },
+        { ("Cena15", "Cena16"), new Vector3(0.02f, -2.7f, 0f) }
+    };
+
+    private readonly List<string> sceneOrder = new List<string>
+    {
+        "Cena1", "Cena2", "Cena3", "Cena4", "Cena5", "Cena6", "Cena7", "Cena8",
+        "Cena9", "Cena10", "Cena11", "Cena12", "Cena13", "Cena14", "Cena15", "Cena16_Boss"
+    };
+
+    public HashSet<string> openedChests = new HashSet<string>();
+
     void Awake()
     {
         // Implement the singleton pattern
@@ -36,17 +75,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        // Registra o evento de carregamento de cena
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        // Remove o registro do evento de carregamento de cena
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded; // Registra o evento de carregamento de cena
+    void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded; // Remove o evento de carregamento de cena
 
     // Chamado quando uma nova cena é carregada
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -76,36 +106,6 @@ public class GameManager : MonoBehaviour
         PositionPlayerOnSceneLoad();
     }   
 
-    public void LoseLife()
-    {
-        lifes--;
-        PlayerScore1 = 0; // Reset score when losing a life
-        // Reload the scene, reset coins, reset score, but keep player lives
-        if (lifes > 0)
-        {
-            SavePlayerPosition(); // Salva a posição antes de recarregar a cena
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-        if (lifes == 0)
-        {
-            GameOver();
-        }
-    }
-
-    public static void DrawLifes()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject heart = GameObject.Find($"Heart{i}");
-            if (heart != null)
-            {
-                heart.GetComponent<SpriteRenderer>().enabled = i < lifes;
-            }
-        }
-    }
-
-
     // Salva a posição atual do jogador no dicionário
     private void SavePlayerPosition()
     {
@@ -120,118 +120,13 @@ public class GameManager : MonoBehaviour
     private void PositionPlayerOnSceneLoad()
     {
         string currentScene = SceneManager.GetActiveScene().name;
-        string previousScene = this.previousScene;
         Debug.Log($"Cena atual: {currentScene}, Cena anterior: {previousScene}");
 
         if (savedPositions.ContainsKey(currentScene) && savedPositions[currentScene].HasValue)
         {
-            if (currentScene == "Cena2" && previousScene == "Cena3") // transicao da Cena3 para Cena2
+            if (sceneTransitions.TryGetValue((previousScene, currentScene), out Vector3 targetPosition))
             {
-                thePlayer.transform.position = new Vector3(-6.042691f, 8.385761f, 0f);
-            }
-            else if (currentScene == "Cena3" && previousScene == "Cena2") // transicao da Cena2 para Cena3
-            {
-                thePlayer.transform.position = new Vector3(6.16f, -1.6f, 0f);
-            }
-            else if (currentScene == "Cena2" && previousScene == "Cena4") // transicao da Cena4 para Cena2
-            {
-                thePlayer.transform.position = new Vector3(5.78788f, 8.521598f, 0f);
-            }
-            else if (currentScene == "Cena4" && previousScene == "Cena2") // transicao da Cena2 para Cena4
-            {
-                thePlayer.transform.position = new Vector3(-6.16f, -1.03f, 0f);
-            }
-            else if (currentScene == "Cena2" && previousScene == "Cena5") // transicao da Cena5 para Cena2
-            {
-                thePlayer.transform.position = new Vector3(-0.08580431f, 14.966f, 0f);
-            }
-            else if (currentScene == "Cena5" && previousScene == "Cena2") // transicao da Cena2 para Cena5
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.710258f, 0f);
-            }
-            else if (currentScene == "Cena5" && previousScene == "Cena10") // transicao da Cena10 para Cena5
-            {
-                thePlayer.transform.position = new Vector3(-6.265987f, -0.5999068f, 0f);
-            }
-            else if (currentScene == "Cena10" && previousScene == "Cena5") // transicao da Cena5 para Cena10
-            {
-                thePlayer.transform.position = new Vector3(6.02f, -0.66f, 0f);
-            }
-            else if (currentScene == "Cena5" && previousScene == "Cena9") // transicao da Cena9 para Cena5
-            {
-                thePlayer.transform.position = new Vector3(6.159083f, -0.532959f, 0f);
-            }
-            else if (currentScene == "Cena9" && previousScene == "Cena5") // transicao da Cena5 para Cena9
-            {
-                thePlayer.transform.position = new Vector3(-6.272023f, -0.66f, 0f);
-            }
-            else if (currentScene == "Cena5" && previousScene == "Cena6") // transicao da Cena6 para Cena5
-            {
-                thePlayer.transform.position = new Vector3(0.02f, 1.730677f, 0f);
-            }
-            else if (currentScene == "Cena6" && previousScene == "Cena5") // transicao da Cena5 para Cena6
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
-            }
-            else if (currentScene == "Cena6" && previousScene == "Cena15") // transicao da Cena15 para Cena6
-            {
-                thePlayer.transform.position = new Vector3(0.02f, 1.730677f, 0f);
-            }
-            else if (currentScene == "Cena15" && previousScene == "Cena6") // transicao da Cena6 para Cena15
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
-            }
-            else if (currentScene == "Cena10" && previousScene == "Cena11") // transicao da Cena11 para Cena10
-            {
-                thePlayer.transform.position = new Vector3(0.02f, 1.730677f, 0f);
-            }
-            else if (currentScene == "Cena11" && previousScene == "Cena10") // transicao da Cena10 para Cena11
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
-            }
-            else if (currentScene == "Cena9" && previousScene == "Cena12") // transicao da Cena12 para Cena9
-            {
-                thePlayer.transform.position = new Vector3(0.02f, 1.730677f, 0f);
-            }
-            else if (currentScene == "Cena12" && previousScene == "Cena9") // transicao da Cena9 para Cena12
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
-            }
-            else if (currentScene == "Cena11" && previousScene == "Cena13") // transicao da Cena13 para Cena11
-            {
-                thePlayer.transform.position = new Vector3(0.02f, 1.730677f, 0f);
-            }
-            else if (currentScene == "Cena13" && previousScene == "Cena11") // transicao da Cena11 para Cena13
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
-            }
-            else if (currentScene == "Cena12" && previousScene == "Cena14") // transicao da Cena14 para Cena12
-            {
-                thePlayer.transform.position = new Vector3(0.02f, 1.730677f, 0f);
-            }
-            else if (currentScene == "Cena14" && previousScene == "Cena12") // transicao da Cena12 para Cena14
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
-            }
-            else if (currentScene == "Cena13" && previousScene == "Cena15") // transicao da Cena15 para Cena13
-            {
-                thePlayer.transform.position = new Vector3(6.105287f, -0.4260389f, 0f);
-            }
-            else if (currentScene == "Cena15" && previousScene == "Cena13") // transicao da Cena13 para Cena15
-            {
-                thePlayer.transform.position = new Vector3(-5.948434f, -0.519862f, 0f);
-            }
-            else if (currentScene == "Cena15" && previousScene == "Cena14") // transicao da Cena14 para Cena15
-            {
-                thePlayer.transform.position = new Vector3(5.942899f, -0.4849414f, 0f);
-            }
-            else if (currentScene == "Cena14" && previousScene == "Cena15") // transicao da Cena15 para Cena14
-            {
-                thePlayer.transform.position = new Vector3(-6.119143f, -0.6036257f, 0f);
-            }
-            else if (currentScene == "Cena16" && previousScene == "Cena15") // transicao da Cena15 para Cena16
-            {
-                thePlayer.transform.position = new Vector3(0.02f, -2.7f, 0f);
+                thePlayer.transform.position = targetPosition;
             }
             else
             {
@@ -240,7 +135,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Define a posição padrão (ponto de spawn)
             GameObject spawnPoint = GameObject.Find("SpawnPoint");
             if (spawnPoint != null)
             {
@@ -248,6 +142,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -279,200 +174,91 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Salva a posição do jogador antes de trocar de cena
-        Vector2 playerPosition = thePlayer.transform.position;
-        if (SceneManager.GetActiveScene().name == "Cena1")
-        {
-            if (playerPosition.x >= -1.909972f && playerPosition.x <= 1.910001f && Mathf.Approximately(playerPosition.y, 34.06695f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena2");
-            }
-        }
+        CheckSceneTransitions(SceneManager.GetActiveScene().name, thePlayer.transform.position);
+    }
 
-        else if (SceneManager.GetActiveScene().name == "Cena2")
+    private void CheckSceneTransitions(string scene, Vector2 pos)
+    {
+        var transitions = new Dictionary<string, (Vector2 min, Vector2 max, string targetScene)[]>
         {
-            if (playerPosition.x >= -0.9350259f && playerPosition.x <= 0.935003f && Mathf.Approximately(playerPosition.y, 15.4524f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena5");
-            }
-            else if (Mathf.Approximately(playerPosition.x, -6.335011f) && playerPosition.y >= 8.068845f && playerPosition.y <= 8.935001f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena3");
-            }
-            else if (Mathf.Approximately(playerPosition.x, 6.308114f) && playerPosition.y >= 8.064985f && playerPosition.y <= 8.935001f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena4");
-            }
-        }
+            { "Cena1", new[] { (new Vector2(-1.909972f, 34.06695f), new Vector2(1.910001f, 34.06695f), "Cena2") } },
+            { "Cena2", new[] { (new Vector2(-0.9350259f, 15.53006f), new Vector2(0.935003f, 15.53006f), "Cena5"),
+                               (new Vector2(-6.335011f, 8.068845f), new Vector2(-6.335011f, 8.935001f), "Cena3"),
+                               (new Vector2(6.308114f, 8.064985f), new Vector2(6.308114f, 8.935001f), "Cena4") } },
+            { "Cena3", new[] { (new Vector2(6.652393f, -1.935015f), new Vector2(6.652393f, -1.208376f), "Cena2") } },
+            { "Cena4", new[] { (new Vector2(-6.752596f, -1.477549f), new Vector2(-6.752596f, -0.5053926f), "Cena2") } },
+            { "Cena5", new[] { (new Vector2(-0.7820935f, -3.702741f), new Vector2(0.8307027f, -3.702741f), "Cena2"),
+                               (new Vector2(-0.7181748f, 2.066446f), new Vector2(0.7148368f, 2.066446f), "Cena6"),
+                               (new Vector2(6.514736f, -1.51467f), new Vector2(6.514736f, 0.5432134f), "Cena9"),
+                               (new Vector2(-6.772685f, -1.605973f), new Vector2(-6.772685f, 0.5947051f), "Cena10") } },
+            { "Cena6", new[] { (new Vector2(-0.7820935f, -3.11787f), new Vector2(0.8307027f, -3.11787f), "Cena5"),
+                               (new Vector2(-0.7684372f, 2.016829f), new Vector2(0.760188f, 2.016829f), "Cena15") } },
+            { "Cena8", new[] { (new Vector2(-0.7060629f, -3.107711f), new Vector2(0.7072755f, -3.107711f), "Cena5") } },
+            { "Cena9", new[] { (new Vector2(-6.678032f, -1.55167f), new Vector2(-6.678032f, 0.5063582f), "Cena5"),
+                               (new Vector2(-0.7181748f, 2.003242f), new Vector2(0.7148368f, 2.003242f), "Cena12") } },
+            { "Cena10", new[] { (new Vector2(6.734772f, -1.521577f), new Vector2(6.734772f, 0.5304125f), "Cena5"),
+                                (new Vector2(-0.7181748f, 2.003242f), new Vector2(0.7148368f, 2.003242f), "Cena11") } },
+            { "Cena11", new[] { (new Vector2(-0.7820935f, -3.11787f), new Vector2(0.8307027f, -3.11787f), "Cena10"),
+                                (new Vector2(-0.7181748f, 2.003242f), new Vector2(0.7148368f, 2.003242f), "Cena13") } },
+            { "Cena12", new[] { (new Vector2(-0.7820935f, -3.11787f), new Vector2(0.8307027f, -3.11787f), "Cena9"),
+                                (new Vector2(-0.7181748f, 2.003242f), new Vector2(0.7148368f, 2.003242f), "Cena14") } },
+            { "Cena13", new[] { (new Vector2(-0.7820935f, -3.11787f), new Vector2(0.8307027f, -3.11787f), "Cena11"),
+                                (new Vector2(6.600544f, -1.586784f), new Vector2(6.600544f, 0.5661189f), "Cena15") } },
+            { "Cena14", new[] { (new Vector2(-0.7820935f, -3.11787f), new Vector2(0.8307027f, -3.11787f), "Cena12"),
+                                (new Vector2(-6.746841f, -1.55167f), new Vector2(-6.746841f, 0.5063582f), "Cena15") } },
+            { "Cena15", new[] { (new Vector2(-0.7820935f, -3.100172f), new Vector2(0.8307027f, -3.100172f), "Cena6"),
+                                (new Vector2(-6.678032f, -1.55167f), new Vector2(-6.678032f, 0.5063582f), "Cena13"),
+                                (new Vector2(6.600544f, -1.568303f), new Vector2(6.600544f, 0.5683065f), "Cena14"),
+                                (new Vector2(-0.7296513f, 2.066446f), new Vector2(0.7507334f, 2.066446f), "Cena16_Boss") } }
+        };
 
-        else if (SceneManager.GetActiveScene().name == "Cena3")
+        if (transitions.ContainsKey(scene))
         {
-            if (Mathf.Approximately(playerPosition.x, 6.652393f) && playerPosition.y >= -1.935015f && playerPosition.y <= -1.208376f)
+            foreach (var (min, max, targetScene) in transitions[scene])
             {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena2");
-            }
-        }
+                if (pos.x >= min.x && pos.x <= max.x && pos.y >= min.y && pos.y <= max.y)
+                {
+                    // Verifica se a cena de destino é diferente da cena atual
+                    if (SceneManager.GetActiveScene().name != targetScene)
+                    {
+                        Debug.Log($"Transição de cena: {scene} -> {targetScene}");
 
-        else if (SceneManager.GetActiveScene().name == "Cena4")
-        {
-            if (Mathf.Approximately(playerPosition.x, -6.752596f) && playerPosition.y >= -1.477549f && playerPosition.y <= -0.5053926f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena2");
+                        // Salva a posição do jogador antes de trocar de cena
+                        SavePlayerPosition();
+                        SceneManager.LoadScene(targetScene);
+                        break;
+                    }
+                }
             }
         }
+    }
 
-        else if (SceneManager.GetActiveScene().name == "Cena5")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.702741f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena2");
-            }
-            else if (playerPosition.x >= -0.7181748f && playerPosition.x <= 0.7148368f && Mathf.Approximately(playerPosition.y, 2.066446f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena6");
-            }
-            else if (Mathf.Approximately(playerPosition.x, 6.514736f) && playerPosition.y >= -1.51467f && playerPosition.y <= 0.5432134f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena9");
-            }
-            else if (Mathf.Approximately(playerPosition.x, -6.772685f) && playerPosition.y >= -1.605973f && playerPosition.y <= 0.5947051f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena10");
-            }
-        }
+    public void LoseLife(int amount)
+    {
+        lifes -= amount; // Reduz a quantidade de vidas com base no dano
+        Debug.Log("Vidas restantes: " + lifes);
 
-        else if (SceneManager.GetActiveScene().name == "Cena6")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.11787f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena5");
-            }
-            else if (playerPosition.x >= -0.7684372f && playerPosition.x <= 0.760188f && Mathf.Approximately(playerPosition.y, 2.016829f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena15");
-            }
-        }
+        DrawLifes(); // Atualiza a exibição dos corações na tela
 
-        else if (SceneManager.GetActiveScene().name == "Cena8")
+        if (lifes > 0)
         {
-            if (playerPosition.x >= -0.7060629f && playerPosition.x <= 0.7072755f && Mathf.Approximately(playerPosition.y, -3.107711f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena5");
-            }
+            SavePlayerPosition(); // Salva a posição do jogador
         }
+        else
+        {
+            RestartGame(); // Reinicia o jogo se as vidas acabarem
+        }
+    }
 
-        else if (SceneManager.GetActiveScene().name == "Cena9")
+    public static void DrawLifes()
+    {
+        for (int i = 0; i < 3; i++)
         {
-            if (Mathf.Approximately(playerPosition.x, -6.678032f) && playerPosition.y >= -1.55167f && playerPosition.y <= 0.5063582f)
+            GameObject heart = GameObject.Find($"Heart{i}");
+            if (heart != null)
             {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena5");
-            }
-            else if (playerPosition.x >= -0.7181748f && playerPosition.x <= 0.7148368f && Mathf.Approximately(playerPosition.y, 2.003242f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena12");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena10")
-        {
-            if (Mathf.Approximately(playerPosition.x, 6.734772f) && playerPosition.y >= -1.521577f && playerPosition.y <= 0.5304125f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena5");
-            }
-            else if (playerPosition.x >= -0.7181748f && playerPosition.x <= 0.7148368f && Mathf.Approximately(playerPosition.y, 2.003242f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena11");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena11")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.11787f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena10");
-            }
-            else if (playerPosition.x >= -0.7181748f && playerPosition.x <= 0.7148368f && Mathf.Approximately(playerPosition.y, 2.003242f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena13");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena12")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.11787f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena9");
-            }
-            else if (playerPosition.x >= -0.7181748f && playerPosition.x <= 0.7148368f && Mathf.Approximately(playerPosition.y, 2.003242f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena14");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena13")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.11787f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena11");
-            }
-            else if (Mathf.Approximately(playerPosition.x, 6.600544f) && playerPosition.y >= -1.586784f && playerPosition.y <= 0.5661189f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena15");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena14")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.11787f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena12");
-            }
-            else if (Mathf.Approximately(playerPosition.x, -6.746841f) && playerPosition.y >= -1.55167f && playerPosition.y <= 0.5063582f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena15");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena15")
-        {
-            if (playerPosition.x >= -0.7820935f && playerPosition.x <= 0.8307027f && Mathf.Approximately(playerPosition.y, -3.100172f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena6");
-            }
-            else if (Mathf.Approximately(playerPosition.x, -6.678032f) && playerPosition.y >= -1.55167f && playerPosition.y <= 0.5063582f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena13");
-            }
-            else if (Mathf.Approximately(playerPosition.x, 6.600544f) && playerPosition.y >= -1.568303f && playerPosition.y <= 0.5683065f)
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena14");
-            }
-            else if (playerPosition.x >= -0.7296513f && playerPosition.x <= 0.7507334f && Mathf.Approximately(playerPosition.y, 2.066446f))
-            {
-                SavePlayerPosition();
-                SceneManager.LoadScene("Cena16_Boss");
+                // Exibe apenas os corações correspondentes às vidas restantes
+                heart.GetComponent<SpriteRenderer>().enabled = i < lifes;
             }
         }
     }
@@ -503,50 +289,23 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(xPosition, yPosition, labelWidth, labelHeight), timeText);
     }
 
-    public void GameOver()
-    {
-        lifes = 3; // Reset lifes when game is over
-        PlayerScore1 = 0; // Reset score when game is over
-        savedPositions.Clear(); // Limpa todas as posições salvas
-        SceneManager.LoadScene("GameOver");
-    }
+    // public void GameOver()
+    // {
+    //     lifes = 3; // Reset lifes when game is over
+    //     PlayerScore1 = 0; // Reset score when game is over
+    //     savedPositions.Clear(); // Limpa todas as posições salvas
+    //     SceneManager.LoadScene("GameOver");
+    // }
 
     public void RestartGame()
     {
         lifes = 3; // Reset vidas ao reiniciar o jogo
         currentTime = gameTime; // Reinicia o tempo
-        savedPositions.Clear(); // Limpa todas as posições salvas
+        // savedPositions.Clear(); // Limpa todas as posições salvas
         SceneManager.LoadScene("Cena2"); // Reinicia na cena inicial
     }
 
-    private bool IsSceneAfter(string sceneName)
-    {
-        // Lista de cenas em ordem
-        List<string> sceneOrder = new List<string>
-        {
-            "Cena1",
-            "Cena2",
-            "Cena3",
-            "Cena4",
-            "Cena5",
-            "Cena6",
-            "Cena7",
-            "Cena8",
-            "Cena9",
-            "Cena10",
-            "Cena11",
-            "Cena12",
-            "Cena13",
-            "Cena14",
-            "Cena15",
-            "Cena16_Boss"
-        };
-
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        // Verifica se a cena atual está depois da "Cena2"
-        return sceneOrder.IndexOf(currentScene) > sceneOrder.IndexOf(sceneName);
-    }
+    private bool IsSceneAfter(string sceneName) => sceneOrder.IndexOf(SceneManager.GetActiveScene().name) > sceneOrder.IndexOf(sceneName);
 
     public void ReduceTime(float penalty)
     {
@@ -562,5 +321,11 @@ public class GameManager : MonoBehaviour
     {
         isInteracting = interacting;
         Debug.Log($"isInteracting: {isInteracting}");
+    }
+
+    // Chame isso quando o jogo iniciar uma nova run
+    public void ResetRunData()
+    {
+        openedChests.Clear(); // Limpa os baús abertos
     }
 }

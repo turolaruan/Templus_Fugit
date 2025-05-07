@@ -21,7 +21,7 @@ public class DialogueBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space)){ // fazer o texto trocar para a proxima linha automaticamente depois que aparecer todo o texto e esperar 2 segundos,sem ter que apertar Space
             if(textComponent.text == lines[index]){
                 NextLine();
             }else{
