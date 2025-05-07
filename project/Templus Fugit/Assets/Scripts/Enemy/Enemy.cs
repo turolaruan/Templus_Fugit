@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     // private static readonly int Attack = Animator.StringToHash("Attack");
     // private static readonly int Death = Animator.StringToHash("Death");
     
+    // [Header("Recompensa em Moedas")]
+    // public int coinReward = 5;
 
     private bool _initialized;
 
