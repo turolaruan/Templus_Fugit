@@ -12,6 +12,7 @@ TagManager:
   - Interactable
   - Door
   - Boss
+  - Coin
   layers:
   - Default
   - TransparentFX

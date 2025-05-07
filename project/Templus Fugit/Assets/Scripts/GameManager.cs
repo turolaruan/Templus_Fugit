@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class GameManager : MonoBehaviour
 
     public float gameTime = 300f;        // Tempo total do jogo em segundos
     private float currentTime;          // Tempo restante
+
+    [Header("Moedas")]
+    public int coinCount = 0;
+    public GameObject coinPrefab;       // arraste o prefab de moeda aqui
+
+    private Texture2D _coinTex;
 
     // Dicionário para armazenar a última posição do jogador em cada cena
     private Dictionary<string, Vector3?> savedPositions = new Dictionary<string, Vector3?>();
@@ -63,15 +70,23 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Implement the singleton pattern
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Prevent GameManager from being destroyed on scene reload
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate GameManager instances
+            Destroy(gameObject);
+            return;
+        }
+
+        // extrai o texture2D do sprite da moeda para usar no OnGUI
+        if (coinPrefab != null)
+        {
+            var sr = coinPrefab.GetComponent<SpriteRenderer>();
+            if (sr != null && sr.sprite != null)
+                _coinTex = sr.sprite.texture;
         }
     }
 
@@ -104,6 +119,7 @@ public class GameManager : MonoBehaviour
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         DrawLifes();
         PositionPlayerOnSceneLoad();
+        // UpdateCoinUI();
     }   
 
     // Salva a posição atual do jogador no dicionário
@@ -266,27 +282,43 @@ public class GameManager : MonoBehaviour
     // Gerência da pontuação e fluxo do jogo
     void OnGUI()
     {
-        // Verifica se a cena atual é "Cena1"
         if (SceneManager.GetActiveScene().name == "Cena1")
-        {
-            return; // Não exibe o timer na Cena1
-        }
+            return;
 
-        // Define a cor do texto no GUISkin
-        layout.label.normal.textColor = Color.white; // Altere para a cor desejada
-
+        layout.label.normal.textColor = Color.white;
         GUI.skin = layout;
 
-        // Exibe o tempo restante no formato "0s"
         string timeText = Mathf.FloorToInt(currentTime).ToString() + "s";
-
-        // Define a posição no canto superior direito
-        float labelWidth = 100f; // Largura do texto
-        float labelHeight = 50f; // Altura do texto
-        float xPosition = Screen.width - labelWidth - 10f; // 10px de margem da borda direita
-        float yPosition = 10f; // 10px de margem do topo
-
+        float labelWidth = 100f, labelHeight = 50f;
+        float xPosition = Screen.width - labelWidth - 10f;
+        float yPosition = 10f;
         GUI.Label(new Rect(xPosition, yPosition, labelWidth, labelHeight), timeText);
+
+        if (_coinTex != null)
+        {
+            int coins = coinCount; // Agora usa o coinCount do GameManager
+
+            float iconSize = 32f;
+            string coinText = coins.ToString();
+            var style = new GUIStyle(layout.label) { fontSize = 24 };
+            Vector2 textSize = style.CalcSize(new GUIContent(coinText));
+
+            float totalW = iconSize + 5f + textSize.x;
+            float startX = (Screen.width - totalW) * 0.5f;
+
+            // Ajusta a altura para yPosition = 10f
+            float startY = yPosition;
+
+            GUI.DrawTexture(new Rect(startX, startY, iconSize, iconSize), _coinTex);
+
+            GUI.Label(
+                new Rect(startX + iconSize + 5f,
+                        startY + (iconSize - textSize.y) * 0.5f,
+                        textSize.x, textSize.y),
+                coinText,
+                style
+            );
+        }
     }
 
     // public void GameOver()
@@ -327,5 +359,11 @@ public class GameManager : MonoBehaviour
     public void ResetRunData()
     {
         openedChests.Clear(); // Limpa os baús abertos
+    }
+
+    public void AddCoins(int amount)
+    {
+        coinCount += amount;
+        Debug.Log($"Moedas no GameManager: {coinCount}");
     }
 }

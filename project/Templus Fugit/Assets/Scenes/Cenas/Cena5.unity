@@ -7836,7 +7836,12 @@ MonoBehaviour:
   moveDownKey: 115
   moveLeftKey: 97
   moveRightKey: 100
+  interactKey: 101
   moveSpeed: 35
+  interactionRange: 2
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   boundXEsquerda: -6.772685
   boundXDireita: 6.514736
   boundYBaixo: -3.702741
@@ -7849,6 +7854,7 @@ MonoBehaviour:
   paradoFrente: {fileID: 9100000, guid: 7a741dbc8c6f5f34eb736aff3f629daf, type: 2}
   paradoEsquerda: {fileID: 9100000, guid: 0632cb0f475d56849b9100ada5dac7fb, type: 2}
   paradoDireita: {fileID: 9100000, guid: 1dad070368fdfd14d90f092146e29332, type: 2}
+  hitCooldown: 2
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4

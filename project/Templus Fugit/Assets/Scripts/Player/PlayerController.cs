@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     private bool canBeHit = true; // Para evitar que de dano enquanto está em cooldown
     public float hitCooldown = 2f; // Tempo de cooldown para receber dano
 
+    [Header("Moedas")]
+    public int coinCount = 0;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -145,5 +148,47 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactionRange);
+    }
+
+    /// <summary>
+    /// Dá moedas ao jogador.
+    /// </summary>
+    public void AddCoins(int amount = 1)
+    {
+        GameManager.Instance.AddCoins(amount); // Atualiza o GameManager
+        Debug.Log($"Player adicionou {amount} moedas. Total: {GameManager.Instance.coinCount}");
+    }
+
+    /// <summary>
+    /// Tenta gastar moedas; retorna true se conseguiu.
+    /// </summary>
+    public bool SpendCoins(int amount)
+    {
+        if (GameManager.Instance.coinCount >= amount)
+        {
+            GameManager.Instance.AddCoins(-amount); // Atualiza o GameManager
+            Debug.Log($"Player gastou {amount} moedas. Restam: {GameManager.Instance.coinCount}");
+            return true;
+        }
+        Debug.Log("Moedas insuficientes.");
+        return false;
+    }
+
+    /// <summary>
+    /// Retorna quantas moedas o player tem.
+    /// </summary>
+    public int GetCoinCount()
+    {
+        return GameManager.Instance.coinCount; // Consulta o GameManager
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Se o objeto tiver a tag "Coin"
+        if (other.CompareTag("Coin"))
+        {
+            AddCoins(1);
+            Destroy(other.gameObject);
+        }
     }
 }
