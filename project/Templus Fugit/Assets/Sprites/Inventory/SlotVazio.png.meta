@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SlotVazio_0: 8144212348953700139
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -428,6 +428,8 @@ public class GameManager : MonoBehaviour
         // savedPositions.Clear();      // opcional: limpa todas as posições salvas
         previousScene = null;        // MUITO IMPORTANTE: impede a transição automática
 
+        // Limpa o dicionário de posições salvas
+        savedPositions.Clear();
         SceneManager.LoadScene("Cena2");
     }
 
@@ -538,4 +540,6 @@ public class GameManager : MonoBehaviour
         // remove do inventário
         RemoveInventoryItem(slotIndex);
     }
+
+    
 }

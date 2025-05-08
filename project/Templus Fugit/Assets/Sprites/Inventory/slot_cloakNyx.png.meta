@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      slot_cloakNyx_0: 1650390262612929984
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
