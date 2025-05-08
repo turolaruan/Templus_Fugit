@@ -7676,8 +7676,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5b8e992ebd10458a5483b8d9224e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hudPrefab: {fileID: 0}
   layout: {fileID: 11400000, guid: f14494d8ac372224787d94ea0e479745, type: 2}
   gameTime: 300
+  coinCount: 0
+  coinPrefab: {fileID: 0}
+  heartsUI: []
 --- !u!4 &545912325
 Transform:
   m_ObjectHideFlags: 0
@@ -7878,7 +7882,12 @@ MonoBehaviour:
   moveDownKey: 115
   moveLeftKey: 97
   moveRightKey: 100
+  interactKey: 101
   moveSpeed: 35
+  interactionRange: 2
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
   boundXEsquerda: -5.897472
   boundXDireita: 5.73647
   boundYBaixo: -3.11787
@@ -7891,6 +7900,8 @@ MonoBehaviour:
   paradoFrente: {fileID: 9100000, guid: 7a741dbc8c6f5f34eb736aff3f629daf, type: 2}
   paradoEsquerda: {fileID: 9100000, guid: 0632cb0f475d56849b9100ada5dac7fb, type: 2}
   paradoDireita: {fileID: 9100000, guid: 1dad070368fdfd14d90f092146e29332, type: 2}
+  hitCooldown: 2
+  coinCount: 0
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -9332,67 +9343,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241014220}
   m_CullTransparentMesh: 1
---- !u!1001 &1306588288
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1172095746224571587, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_Name
-      value: Hearts
-      objectReference: {fileID: 0}
-    - target: {fileID: 7511638680475841036, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 1173312574}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05341147
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
 --- !u!1 &1335496378
 GameObject:
   m_ObjectHideFlags: 0
@@ -10252,6 +10202,5 @@ SceneRoots:
   - {fileID: 197966603}
   - {fileID: 536094888}
   - {fileID: 2040748212}
-  - {fileID: 1306588288}
   - {fileID: 801976851}
   - {fileID: 517958266}

@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum LockpickDifficulty { Easy, Medium, Hard }
 
 public class LockpickMinigame : MonoBehaviour
 {
     [Header("Referências da UI")]
-    public Text keyPrompt;
+    [Tooltip("Arraste aqui o TextMeshProUGUI que exibe o prompt (ex: PRESSIONE: A)")]
+    public TextMeshProUGUI keyPrompt;
     public RectTransform oscillatingBar;
     public RectTransform hitZone;
 
@@ -43,7 +45,7 @@ public class LockpickMinigame : MonoBehaviour
                 if (currentIndex >= sequence.Length)
                     Success();
                 else
-                    keyPrompt.text = "PRESSIONE: " + sequence[currentIndex];
+                    keyPrompt.text = $"PRESSIONE: {sequence[currentIndex]}";
             }
             else
             {
@@ -57,79 +59,69 @@ public class LockpickMinigame : MonoBehaviour
     /// </summary>
     public void StartMinigame(LockpickDifficulty difficulty, System.Action onSuccess = null)
     {
-        // Trava a movimentação do jogador
-        PlayerController player = FindObjectOfType<PlayerController>();
-        if (player != null)
-            player.SetCanMove(false);
+        // 0) trava o player
+        var player = FindObjectOfType<PlayerController>();
+        if (player != null) player.SetCanMove(false);
 
         onSuccessCallback = () =>
         {
-            // Destrava a movimentação do jogador ao concluir o minigame
-            if (player != null)
-                player.SetCanMove(true);
-
+            if (player != null) player.SetCanMove(true);
             onSuccess?.Invoke();
         };
 
-        currentIndex      = 0;
-        isPlaying         = true;
-        isMovingRight     = true;
+        currentIndex = 0;
+        isPlaying = true;
+        isMovingRight = true;
         oscillatingBar.anchoredPosition = new Vector2(-150, 0);
 
-        // 1) Define tamanho da sequência e largura da zona
+        // 1) define tamanho e zona
         int length;
         float zoneWidth;
         switch (difficulty)
         {
             case LockpickDifficulty.Easy:
-                length    = 3;   zoneWidth = 80;  break;
+                length = 3; zoneWidth = 80; break;
             case LockpickDifficulty.Medium:
-                length    = Random.Range(4, 6);   zoneWidth = 50;  break;
+                length = Random.Range(4, 6); zoneWidth = 50; break;
             default: // Hard
-                length    = Random.Range(6, 8);   zoneWidth = 30;  break;
+                length = Random.Range(6, 8); zoneWidth = 30; break;
         }
 
-        // 2) Gera sequência aleatória de letras A–Z
+        // 2) gera sequência A–Z
         sequence = GenerateRandomSequence(length);
 
-        // 3) Ajusta a UI da zona de acerto
+        // 3) ajusta o hitZone
         hitZone.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, zoneWidth);
         float halfRange = 150f;
-        float minX = -halfRange + zoneWidth * 0.5f;
-        float maxX =  halfRange - zoneWidth * 0.5f;
+        float minX = -halfRange + zoneWidth * .5f;
+        float maxX =  halfRange - zoneWidth * .5f;
         float randomX = Random.Range(minX, maxX);
         hitZone.anchoredPosition = new Vector2(randomX, hitZone.anchoredPosition.y);
 
-        // 4) Exibe a primeira letra a ser pressionada
-        keyPrompt.text = "PRESSIONE: " + sequence[0];
+        // 4) exibe primeira letra
+        keyPrompt.text = $"PRESSIONE: {sequence[0]}";
     }
 
-    /// <summary>
-    /// Gera uma sequência aleatória de 'length' letras (A–Z).
-    /// </summary>
     private string[] GenerateRandomSequence(int length)
     {
-        string alphabet = "ABCDFGHIJKLMNOPQRSTUVWXYZ";
-        string[] generated = new string[length];
+        const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var generated = new string[length];
         for (int i = 0; i < length; i++)
-        {
-            int idx = Random.Range(0, alphabet.Length);
-            generated[i] = alphabet[idx].ToString();
-        }
+            generated[i] = alphabet[Random.Range(0, alphabet.Length)].ToString();
         return generated;
     }
 
     private bool IsInZone(float barX)
     {
         float center = hitZone.anchoredPosition.x;
-        float half   = hitZone.sizeDelta.x * 0.5f;
+        float half = hitZone.sizeDelta.x * .5f;
         return barX >= center - half && barX <= center + half;
     }
 
     private void Fail()
     {
         currentIndex = 0;
-        keyPrompt.text = "PRESSIONE: " + sequence[0];
+        keyPrompt.text = $"PRESSIONE: {sequence[0]}";
         Debug.Log("Errou! Sequência reiniciada.");
     }
 
@@ -140,10 +132,8 @@ public class LockpickMinigame : MonoBehaviour
         Debug.Log("Sequência concluída!");
         gameObject.SetActive(false);
 
-        // Destrava a movimentação do jogador ao finalizar o minigame
-        PlayerController player = FindObjectOfType<PlayerController>();
-        if (player != null)
-            player.SetCanMove(true);
+        var player = FindObjectOfType<PlayerController>();
+        if (player != null) player.SetCanMove(true);
 
         onSuccessCallback?.Invoke();
     }

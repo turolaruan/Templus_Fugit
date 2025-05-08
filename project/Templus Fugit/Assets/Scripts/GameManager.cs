@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Tooltip("Arraste aqui o prefab do HUD")]
+    public GameObject hudPrefab;
+    private static bool _hudCreated = false;
+
     public static GameManager Instance; // Singleton instance
     public static int PlayerScore1 = 0; // Pontuação do player 1
     public GUISkin layout;              // Fonte do contador de tempo
@@ -20,6 +24,9 @@ public class GameManager : MonoBehaviour
     public GameObject coinPrefab;       // arraste o prefab de moeda aqui
 
     private Texture2D _coinTex;
+
+    [Header("HUD de Vidas")]
+    public Image[] heartsUI;  // Arraste aqui seus 3 objetos heart_0, heart_1 e heart_2 (UI Images)
 
     // Dicionário para armazenar a última posição do jogador em cada cena
     private Dictionary<string, Vector3?> savedPositions = new Dictionary<string, Vector3?>();
@@ -70,23 +77,52 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        // Singleton padrão
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Instancia o HUD apenas 1x
+            if (!_hudCreated && hudPrefab != null)
+            {
+                GameObject hud = Instantiate(hudPrefab);
+                DontDestroyOnLoad(hud);
+                _hudCreated = true;
+
+                // Agora buscamos todas as Images cujo nome contenha "heart"
+                var heartImages = new List<Image>();
+                foreach (var img in hud.GetComponentsInChildren<Image>(true))
+                {
+                    // Ajuste esse filtro ao nome exato dos seus GameObjects
+                    if (img.gameObject.name.ToLower().Contains("heart"))
+                        heartImages.Add(img);
+                }
+
+                // Ordene, se quiser, por nome (“heart_0”, “heart_1”, “heart_2”)
+                heartImages.Sort((a,b)=>
+                    a.gameObject.name.CompareTo(b.gameObject.name)
+                );
+
+                heartsUI = heartImages.ToArray();
+
+                // Debug caso não tenha encontrado
+                if (heartsUI.Length == 0)
+                    Debug.LogError("GameManager: não encontrei nenhuma Image com 'heart' no nome dentro do HUD!");
+            }
+
+            // extrai o texture2D do sprite da moeda para usar no OnGUI
+            if (coinPrefab != null)
+            {
+                var sr = coinPrefab.GetComponent<SpriteRenderer>();
+                if (sr != null && sr.sprite != null)
+                    _coinTex = sr.sprite.texture;
+            }
         }
         else
         {
             Destroy(gameObject);
             return;
-        }
-
-        // extrai o texture2D do sprite da moeda para usar no OnGUI
-        if (coinPrefab != null)
-        {
-            var sr = coinPrefab.GetComponent<SpriteRenderer>();
-            if (sr != null && sr.sprite != null)
-                _coinTex = sr.sprite.texture;
         }
     }
 
@@ -117,7 +153,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentTime <= 0) currentTime = gameTime;
         thePlayer = GameObject.FindGameObjectWithTag("Player");
-        DrawLifes();
+        UpdateHeartsUI();
         PositionPlayerOnSceneLoad();
         // UpdateCoinUI();
     }   
@@ -175,7 +211,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        DrawLifes();
+        UpdateHeartsUI();
 
         // Verifica se a cena atual é "Cena2" ou posterior antes de atualizar o tempo
         if (SceneManager.GetActiveScene().name == "Cena2" || IsSceneAfter("Cena2"))
@@ -251,31 +287,25 @@ public class GameManager : MonoBehaviour
 
     public void LoseLife(int amount)
     {
-        lifes -= amount; // Reduz a quantidade de vidas com base no dano
+        lifes -= amount;
         Debug.Log("Vidas restantes: " + lifes);
-
-        DrawLifes(); // Atualiza a exibição dos corações na tela
+        UpdateHeartsUI();
 
         if (lifes > 0)
-        {
-            SavePlayerPosition(); // Salva a posição do jogador
-        }
+            SavePlayerPosition();
         else
-        {
-            RestartGame(); // Reinicia o jogo se as vidas acabarem
-        }
+            RestartGame();
     }
 
-    public static void DrawLifes()
+    private void UpdateHeartsUI()
     {
-        for (int i = 0; i < 3; i++)
+        // Proteção contra chamar antes de apontar heartsUI
+        if (heartsUI == null) return;
+
+        for (int i = 0; i < heartsUI.Length; i++)
         {
-            GameObject heart = GameObject.Find($"Heart{i}");
-            if (heart != null)
-            {
-                // Exibe apenas os corações correspondentes às vidas restantes
-                heart.GetComponent<SpriteRenderer>().enabled = i < lifes;
-            }
+            if (heartsUI[i] != null)
+                heartsUI[i].gameObject.SetActive(i < lifes);
         }
     }
 

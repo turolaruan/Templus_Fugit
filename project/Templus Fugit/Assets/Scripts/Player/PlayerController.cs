@@ -128,14 +128,11 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (!canBeHit)
-            return;
+        if (!canBeHit) return;
 
-        // Reduz as vidas no GameManager
-        GameManager.Instance.LoseLife(amount);
-
-        // Inicia o cooldown para evitar dano consecutivo
-        StartCoroutine(HitCooldownCoroutine());
+        canBeHit = false;                            // bloqueia novos hits
+        GameManager.Instance.LoseLife(amount);       // reduz vida e atualiza UI
+        StartCoroutine(HitCooldownCoroutine());      // reinicia permissibilidade depois do cooldown
     }
 
     private IEnumerator HitCooldownCoroutine()

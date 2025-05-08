@@ -7136,8 +7136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5b8e992ebd10458a5483b8d9224e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hudPrefab: {fileID: 0}
   layout: {fileID: 11400000, guid: f14494d8ac372224787d94ea0e479745, type: 2}
   gameTime: 300
+  coinCount: 0
+  coinPrefab: {fileID: 0}
+  heartsUI: []
 --- !u!4 &545912325
 Transform:
   m_ObjectHideFlags: 0
@@ -7303,67 +7307,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &663536451
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1172095746224571587, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_Name
-      value: Hearts
-      objectReference: {fileID: 0}
-    - target: {fileID: 7511638680475841036, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 1173312574}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05341147
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9076171816052784298, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 01ff72d232d568d4386c538476a8312e, type: 3}
 --- !u!1 &679315463
 GameObject:
   m_ObjectHideFlags: 0
@@ -7418,6 +7361,7 @@ MonoBehaviour:
   paradoEsquerda: {fileID: 9100000, guid: 0632cb0f475d56849b9100ada5dac7fb, type: 2}
   paradoDireita: {fileID: 9100000, guid: 1dad070368fdfd14d90f092146e29332, type: 2}
   hitCooldown: 2
+  coinCount: 0
 --- !u!50 &679315465
 Rigidbody2D:
   serializedVersion: 4
@@ -8021,4 +7965,3 @@ SceneRoots:
   - {fileID: 679315467}
   - {fileID: 1153534461}
   - {fileID: 197966603}
-  - {fileID: 663536451}
