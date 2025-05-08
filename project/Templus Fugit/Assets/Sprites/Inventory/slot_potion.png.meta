@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 184ea185d9d501f4785e2ad688ac5396
+guid: 0c36483a74711f2499a93f22213cc95d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3338749442709606003
-    second: Coin_0
+      213: 5483308116640144060
+    second: slot_potion_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coin_0
+      name: slot_potion_0
       rect:
         serializedVersion: 2
-        x: 277
-        y: 260
-        width: 469
-        height: 510
+        x: 95
+        y: 88
+        width: 832
+        height: 846
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d81b24142116aa1d0800000000000000
-      internalID: -3338749442709606003
+      spriteID: cba1a562eaf981c40800000000000000
+      internalID: 5483308116640144060
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Coin_0: -3338749442709606003
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

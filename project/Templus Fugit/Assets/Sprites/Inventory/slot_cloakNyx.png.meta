@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 184ea185d9d501f4785e2ad688ac5396
+guid: b8d0389200bf3a3429bb9ffd0a18f630
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3338749442709606003
-    second: Coin_0
+      213: 1650390262612929984
+    second: slot_cloakNyx_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coin_0
+      name: slot_cloakNyx_0
       rect:
         serializedVersion: 2
-        x: 277
-        y: 260
-        width: 469
-        height: 510
+        x: 95
+        y: 88
+        width: 832
+        height: 846
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d81b24142116aa1d0800000000000000
-      internalID: -3338749442709606003
+      spriteID: 0cdaecf133d57e610800000000000000
+      internalID: 1650390262612929984
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Coin_0: -3338749442709606003
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

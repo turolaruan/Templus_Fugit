@@ -14073,7 +14073,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hudPrefab: {fileID: 9026306677260777904, guid: 1f44b881201bdcc4fbbb220c7d3319b8, type: 3}
   layout: {fileID: 11400000, guid: f14494d8ac372224787d94ea0e479745, type: 2}
+  maxLifes: 3
   gameTime: 300
+  inventorySize: 5
+  emptySlotSprite: {fileID: 8144212348953700139, guid: ca4632c7544d76946a69c0a3e8773d27, type: 3}
+  itemIcons:
+  - {fileID: 0}
+  - {fileID: 5483308116640144060, guid: 0c36483a74711f2499a93f22213cc95d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   coinCount: 0
   coinPrefab: {fileID: 2133305122567589427, guid: 59ef9bddb60ac124abbb889de8daefe8, type: 3}
   heartsUI:
@@ -14833,7 +14842,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.402727
+  orthographic size: 4.3788404
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -15523,6 +15532,14 @@ PrefabInstance:
       value: Chest
       objectReference: {fileID: 0}
     - target: {fileID: 7920299568409997181, guid: 9adf75f3f3493a148b61a30b03276a3d, type: 3}
+      propertyPath: coinReward
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920299568409997181, guid: 9adf75f3f3493a148b61a30b03276a3d, type: 3}
+      propertyPath: difficulty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920299568409997181, guid: 9adf75f3f3493a148b61a30b03276a3d, type: 3}
       propertyPath: lockpickUI
       value: 
       objectReference: {fileID: 1026899357}
@@ -15648,5 +15665,5 @@ SceneRoots:
   - {fileID: 3635168142851763189}
   - {fileID: 4285409598200540960}
   - {fileID: 1750058557}
-  - {fileID: 545912325}
   - {fileID: 717635393}
+  - {fileID: 545912325}

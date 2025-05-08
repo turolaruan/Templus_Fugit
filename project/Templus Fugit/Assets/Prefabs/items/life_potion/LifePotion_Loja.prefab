@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 9028814817966963089}
   - component: {fileID: 5012810982437343916}
   m_Layer: 0
-  m_Name: life_potion
+  m_Name: LifePotion_Loja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

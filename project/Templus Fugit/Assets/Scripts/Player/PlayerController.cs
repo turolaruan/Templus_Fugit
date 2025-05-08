@@ -56,6 +56,15 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement();
         HandleInteraction();
+
+        // usar slot 0…4 via teclas 1–5
+        for (int i = 0; i < 5; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                GameManager.Instance.UseInventoryItem(i);
+            }
+        }
     }
 
     void HandleMovement()
@@ -147,18 +156,14 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, interactionRange);
     }
 
-    /// <summary>
-    /// Dá moedas ao jogador.
-    /// </summary>
+    // Dá moedas ao jogador.
     public void AddCoins(int amount = 1)
     {
         GameManager.Instance.AddCoins(amount); // Atualiza o GameManager
         Debug.Log($"Player adicionou {amount} moedas. Total: {GameManager.Instance.coinCount}");
     }
 
-    /// <summary>
-    /// Tenta gastar moedas; retorna true se conseguiu.
-    /// </summary>
+    // Tenta gastar moedas; retorna true se conseguiu.
     public bool SpendCoins(int amount)
     {
         if (GameManager.Instance.coinCount >= amount)
@@ -171,9 +176,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Retorna quantas moedas o player tem.
-    /// </summary>
+    // Retorna quantas moedas o player tem.
     public int GetCoinCount()
     {
         return GameManager.Instance.coinCount; // Consulta o GameManager

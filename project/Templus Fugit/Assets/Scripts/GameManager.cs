@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+
+public enum ItemType 
+{
+    None = 0,
+    HealthPotion = 1,
+    Key           = 2,
+    // ... depois você vai criar mais
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -10,18 +19,34 @@ public class GameManager : MonoBehaviour
     public GameObject hudPrefab;
     private static bool _hudCreated = false;
 
+    // references to HUD elements
+    private Image   _coinIconUI;
+    private TextMeshProUGUI _coinTextUI;
+    private TextMeshProUGUI _timeTextUI;
+
     public static GameManager Instance; // Singleton instance
     public static int PlayerScore1 = 0; // Pontuação do player 1
     public GUISkin layout;              // Fonte do contador de tempo
-    public static int lifes = 3;        // Vidas do jogador
     public static GameObject thePlayer; // Referência ao objeto jogador
+
+    [Header("Player Settings")]
+    public static int lifes = 3;        // Vidas do jogador
+    public int maxLifes = 3;        // Vidas máximas do jogador
 
     public float gameTime = 300f;        // Tempo total do jogo em segundos
     private float currentTime;          // Tempo restante
 
+    [Header("Inventário")]
+    public int inventorySize = 5;             // quantos slots
+    public Sprite emptySlotSprite;            // sprite slot vazio
+    public Sprite[] itemIcons;                // ícones p/ cada ItemType (índice = enum)
+    private ItemType[] inventory;             // guarda o que o player carrega
+    private Image[]   inventorySlotImages;    // referências aos 5 Image slots
+    
+
     [Header("Moedas")]
     public int coinCount = 0;
-    public GameObject coinPrefab;       // arraste o prefab de moeda aqui
+    public GameObject coinPrefab;   
 
     private Texture2D _coinTex;
 
@@ -90,6 +115,30 @@ public class GameManager : MonoBehaviour
                 DontDestroyOnLoad(hud);
                 _hudCreated = true;
 
+                // pega o TextMeshProUGUI chamado "TimeText"
+                var timeTextTransform = hud.transform
+                                         .Find("HUD/TimeText");
+                if (timeTextTransform != null)
+                    _timeTextUI = timeTextTransform.GetComponent<TextMeshProUGUI>();
+                else
+                    Debug.LogError("Não achei HUD/TimeText no prefab de HUD!");
+
+                // capturando a TextMeshProUGUI do contador de moedas —————
+                var coinsTextTransform = hud.transform
+                                           .Find("HUD/CoinPanel/CoinsText");
+                if (coinsTextTransform != null)
+                    _coinTextUI = coinsTextTransform
+                                    .GetComponent<TextMeshProUGUI>();
+                else
+                    Debug.LogError("GameManager: não achei HUD/CoinPanel/CoinsText!");
+
+                // Se quiser exibir também um ícone:
+                var coinIconTransform = hud.transform
+                                          .Find("HUD/CoinPanel/CoinIcon");
+                if (coinIconTransform != null)
+                    _coinIconUI = coinIconTransform
+                                    .GetComponent<Image>();
+
                 // Agora buscamos todas as Images cujo nome contenha "heart"
                 var heartImages = new List<Image>();
                 foreach (var img in hud.GetComponentsInChildren<Image>(true))
@@ -109,6 +158,37 @@ public class GameManager : MonoBehaviour
                 // Debug caso não tenha encontrado
                 if (heartsUI.Length == 0)
                     Debug.LogError("GameManager: não encontrei nenhuma Image com 'heart' no nome dentro do HUD!");
+
+                // inicializa arrays
+                inventory        = new ItemType[inventorySize];
+                inventorySlotImages = new Image[inventorySize];
+
+                // encontra o painel de slots
+                var invPanel = hud.transform.Find("HUD/InventoryPanel");
+                if (invPanel == null) {
+                    Debug.LogError("GameManager: não achei HUD/InventoryPanel no prefab!");
+                } else {
+                    for (int i = 0; i < inventorySize; i++) {
+                        Transform slotTf = invPanel.Find($"Slot_{i}");
+                        if (slotTf == null) {
+                            Debug.LogWarning($"GameManager: não achei Slot_{i} em InventoryPanel");
+                            continue;
+                        }
+
+                        // pega a própria Image do Slot_X
+                        Image slotImg = slotTf.GetComponent<Image>();
+                        if (slotImg == null) {
+                            Debug.LogWarning($"GameManager: Slot_{i} não tem Image!");
+                            continue;
+                        }
+
+                        inventorySlotImages[i] = slotImg;
+
+                        // inicializa vazio:
+                        inventory[i] = ItemType.None;
+                        slotImg.sprite = emptySlotSprite;
+                    }
+                }
             }
 
             // extrai o texture2D do sprite da moeda para usar no OnGUI
@@ -155,7 +235,8 @@ public class GameManager : MonoBehaviour
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         UpdateHeartsUI();
         PositionPlayerOnSceneLoad();
-        // UpdateCoinUI();
+        UpdateCoinsUI();
+        UpdateTimeUI();
     }   
 
     // Salva a posição atual do jogador no dicionário
@@ -212,6 +293,8 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateHeartsUI();
+        UpdateCoinsUI();
+        UpdateTimeUI();
 
         // Verifica se a cena atual é "Cena2" ou posterior antes de atualizar o tempo
         if (SceneManager.GetActiveScene().name == "Cena2" || IsSceneAfter("Cena2"))
@@ -309,45 +392,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Gerência da pontuação e fluxo do jogo
-    void OnGUI()
+    private void UpdateTimeUI()
     {
-        if (SceneManager.GetActiveScene().name == "Cena1")
+        if (_timeTextUI == null)
             return;
 
-        layout.label.normal.textColor = Color.white;
-        GUI.skin = layout;
-
-        string timeText = Mathf.FloorToInt(currentTime).ToString() + "s";
-        float labelWidth = 100f, labelHeight = 50f;
-        float xPosition = Screen.width - labelWidth - 10f;
-        float yPosition = 10f;
-        GUI.Label(new Rect(xPosition, yPosition, labelWidth, labelHeight), timeText);
-
-        if (_coinTex != null)
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Cena1")
         {
-            int coins = coinCount; // Agora usa o coinCount do GameManager
-
-            float iconSize = 32f;
-            string coinText = coins.ToString();
-            var style = new GUIStyle(layout.label) { fontSize = 24 };
-            Vector2 textSize = style.CalcSize(new GUIContent(coinText));
-
-            float totalW = iconSize + 5f + textSize.x;
-            float startX = (Screen.width - totalW) * 0.5f;
-
-            // Ajusta a altura para yPosition = 10f
-            float startY = yPosition;
-
-            GUI.DrawTexture(new Rect(startX, startY, iconSize, iconSize), _coinTex);
-
-            GUI.Label(
-                new Rect(startX + iconSize + 5f,
-                        startY + (iconSize - textSize.y) * 0.5f,
-                        textSize.x, textSize.y),
-                coinText,
-                style
-            );
+            _timeTextUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            _timeTextUI.gameObject.SetActive(true);
+            int secs = Mathf.FloorToInt(currentTime);
+            _timeTextUI.text = secs + "s";
         }
     }
 
@@ -364,6 +423,7 @@ public class GameManager : MonoBehaviour
         lifes = 3; // Reset vidas ao reiniciar o jogo
         currentTime = gameTime; // Reinicia o tempo
         // savedPositions.Clear(); // Limpa todas as posições salvas
+        ResetRunData(); // Reseta os dados da run
         SceneManager.LoadScene("Cena2"); // Reinicia na cena inicial
     }
 
@@ -395,5 +455,82 @@ public class GameManager : MonoBehaviour
     {
         coinCount += amount;
         Debug.Log($"Moedas no GameManager: {coinCount}");
+    }
+
+    private void UpdateCoinsUI()
+    {
+        if (_coinTextUI != null)
+            _coinTextUI.text = coinCount.ToString();
+    }
+
+    // Adiciona um item ao inventário. Retorna `true` se coube.
+    public bool AddInventoryItem(ItemType item)
+    {
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == ItemType.None)
+            {
+                inventory[i] = item;
+                RefreshInventorySlot(i);
+                return true;
+            }
+        }
+        return false; // inventário cheio
+    }
+
+    // Remove o item do slot selecionado.
+    public void RemoveInventoryItem(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= inventory.Length) return;
+        inventory[slotIndex] = ItemType.None;
+        RefreshInventorySlot(slotIndex);
+    }
+
+    // Atualiza visualmente um slot na UI.
+    private void RefreshInventorySlot(int i)
+    {
+        Image slotImg = inventorySlotImages[i];
+        if (slotImg == null) return;
+
+        if (inventory[i] == ItemType.None)
+        {
+            // sem item → volta pro sprite vazio
+            slotImg.sprite = emptySlotSprite;
+        }
+        else
+        {
+            // com item → usa o sprite específico do vetor itemIcons
+            int idx = (int)inventory[i];
+            if (idx >= 0 && idx < itemIcons.Length && itemIcons[idx] != null)
+                slotImg.sprite = itemIcons[idx];
+            else
+                slotImg.sprite = emptySlotSprite; // fallback caso falte icone
+        }
+    }
+
+
+    // Recupera vidas, sem ultrapassar o máximo.
+    public void AddLife(int amount)
+    {
+        lifes = Mathf.Clamp(lifes + amount, 0, maxLifes);
+        UpdateHeartsUI();
+    }
+
+    // Usa (consome) o item naquele slot e aplica o efeito.
+    public void UseInventoryItem(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= inventory.Length) return;
+
+        ItemType item = inventory[slotIndex];
+        switch (item)
+        {
+            case ItemType.HealthPotion:
+                AddLife(2);   // recupera 2 corações
+                break;
+            // case ItemType.Key: … etc
+        }
+
+        // remove do inventário
+        RemoveInventoryItem(slotIndex);
     }
 }
