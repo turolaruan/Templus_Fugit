@@ -420,12 +420,17 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        lifes = 3; // Reset vidas ao reiniciar o jogo
-        currentTime = gameTime; // Reinicia o tempo
-        // savedPositions.Clear(); // Limpa todas as posições salvas
-        ResetRunData(); // Reseta os dados da run
-        SceneManager.LoadScene("Cena2"); // Reinicia na cena inicial
+        lifes = maxLifes;            // reset das vidas
+        currentTime = gameTime;      // reset do tempo
+
+        ResetRunData();              // limpa openedChests, etc.
+
+        // savedPositions.Clear();      // opcional: limpa todas as posições salvas
+        previousScene = null;        // MUITO IMPORTANTE: impede a transição automática
+
+        SceneManager.LoadScene("Cena2");
     }
+
 
     private bool IsSceneAfter(string sceneName) => sceneOrder.IndexOf(SceneManager.GetActiveScene().name) > sceneOrder.IndexOf(sceneName);
 
