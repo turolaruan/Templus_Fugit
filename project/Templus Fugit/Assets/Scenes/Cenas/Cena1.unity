@@ -14081,10 +14081,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 5483308116640144060, guid: 0c36483a74711f2499a93f22213cc95d, type: 3}
   - {fileID: 0}
+  - {fileID: -8646502401594569541, guid: f40e167246b45374bace702d8d286c19, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  hourglassBonusTime: 30
   coinCount: 0
-  coinPrefab: {fileID: 2133305122567589427, guid: 59ef9bddb60ac124abbb889de8daefe8, type: 3}
   heartsUI:
   - {fileID: 0}
   - {fileID: 0}

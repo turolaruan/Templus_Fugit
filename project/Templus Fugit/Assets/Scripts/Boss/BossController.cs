@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 using UnityEngine.AI;
 
 public class BossController : MonoBehaviour
@@ -42,6 +41,15 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
+        // Se o jogador estiver invisível, o boss fica em idle e não persegue nem ataca
+        if (GameManager.Instance != null && GameManager.Instance.IsInvisible)
+        {
+            animator.runtimeAnimatorController = Idle;
+            agent.isStopped = true;
+            ToggleHitBox(false);
+            return;
+        }
+
         float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
         if (distanceToTarget > detectionRange)
@@ -49,8 +57,6 @@ public class BossController : MonoBehaviour
             // Idle
             animator.runtimeAnimatorController = Idle;
             agent.isStopped = true;
-
-            // Desativa a hitbox se estiver longe do jogador
             ToggleHitBox(false);
         }
         else if (distanceToTarget > attackRange)
@@ -60,24 +66,19 @@ public class BossController : MonoBehaviour
             agent.isStopped = false;
             agent.SetDestination(target.position);
             FlipDirection();
-
-            // Desativa a hitbox enquanto está correndo
             ToggleHitBox(false);
         }
         else
         {
-            // Ataca se estiver no alcance e fora do cooldown
+            // Está no alcance de ataque
+            agent.isStopped = true;
+            FlipDirection();
+
             if (Time.time - lastAttackTime >= attackCooldown && canAttack)
             {
                 StartCoroutine(HandleAttack());
                 lastAttackTime = Time.time;
             }
-
-            agent.isStopped = true;
-            FlipDirection();
-
-            // // Ativa a hitbox enquanto está próximo do jogador
-            // ToggleHitBox(true);
         }
     }
 

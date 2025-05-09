@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
     void Update()
@@ -69,26 +70,25 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
-        Vector2 movement = Vector2.zero;
-
+        Vector2 dir = Vector2.zero;
         if (Input.GetKey(moveUpKey))
         {
-            movement.y += 1;
+            dir.y += 1;
             animator.runtimeAnimatorController = andarCima;
         }
         else if (Input.GetKey(moveDownKey))
         {
-            movement.y -= 1;
+            dir.y -= 1;
             animator.runtimeAnimatorController = andarBaixo;
         }
         else if (Input.GetKey(moveLeftKey))
         {
-            movement.x -= 1;
+            dir.x -= 1;
             animator.runtimeAnimatorController = andarEsquerda;
         }
         else if (Input.GetKey(moveRightKey))
         {
-            movement.x += 1;
+            dir.x += 1;
             animator.runtimeAnimatorController = andarDireita;
         }
         else
@@ -103,13 +103,15 @@ public class PlayerController : MonoBehaviour
                 animator.runtimeAnimatorController = paradoDireita;
         }
 
-        movement = movement.normalized * moveSpeed * Time.deltaTime;
-        Vector2 newPosition = rb2d.position + movement;
+        float dt = Time.unscaledDeltaTime;
+        Vector2 movement = dir.normalized * moveSpeed * dt;
 
-        newPosition.x = Mathf.Clamp(newPosition.x, boundXEsquerda, boundXDireita);
-        newPosition.y = Mathf.Clamp(newPosition.y, boundYBaixo, boundYCima);
+        Vector3 newPos = transform.position + new Vector3(movement.x, movement.y, 0f);
 
-        rb2d.MovePosition(newPosition);
+        newPos.x = Mathf.Clamp(newPos.x, boundXEsquerda, boundXDireita);
+        newPos.y = Mathf.Clamp(newPos.y, boundYBaixo, boundYCima);
+
+        transform.position = newPos;
     }
 
     void HandleInteraction()

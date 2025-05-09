@@ -9,8 +9,10 @@ public enum ItemType
 {
     None = 0,
     HealthPotion = 1,
-    Key           = 2,
-    // ... depois você vai criar mais
+    CloakNyx      = 2,
+    Hourglass     = 3,
+    BrokenWatch   = 4,
+    // Key        = 5,
 }
 
 public class GameManager : MonoBehaviour
@@ -24,17 +26,17 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI _coinTextUI;
     private TextMeshProUGUI _timeTextUI;
 
-    public static GameManager Instance; // Singleton instance
-    public static int PlayerScore1 = 0; // Pontuação do player 1
-    public GUISkin layout;              // Fonte do contador de tempo
-    public static GameObject thePlayer; // Referência ao objeto jogador
+    public static GameManager Instance;       // Singleton instance
+    public static int PlayerScore1 = 0;       // Pontuação do player 1
+    public GUISkin layout;                    // Fonte do contador de tempo
+    public static GameObject thePlayer;       // Referência ao objeto jogador
 
     [Header("Player Settings")]
-    public static int lifes = 3;        // Vidas do jogador
-    public int maxLifes = 3;        // Vidas máximas do jogador
+    public static int lifes = 3;              // Vidas do jogador
+    public int maxLifes = 3;                  // Vidas máximas do jogador
 
-    public float gameTime = 300f;        // Tempo total do jogo em segundos
-    private float currentTime;          // Tempo restante
+    public float gameTime = 300f;             // Tempo total do jogo em segundos
+    private float currentTime;                // Tempo restante
 
     [Header("Inventário")]
     public int inventorySize = 5;             // quantos slots
@@ -42,11 +44,23 @@ public class GameManager : MonoBehaviour
     public Sprite[] itemIcons;                // ícones p/ cada ItemType (índice = enum)
     private ItemType[] inventory;             // guarda o que o player carrega
     private Image[]   inventorySlotImages;    // referências aos 5 Image slots
-    
+
+    [Header("Ampulheta")]
+    public float hourglassBonusTime = 30f;    // tempo extra do Hourglass
+
+    [Header("Relogio Quebrado")]
+    [Tooltip("Quanto tempo (em segundos) o jogo fica congelado")]
+    public float brokenWatchDuration = 10f;
+
+    [Header("Véu de Nyx")]
+    [Tooltip("Duração, em segundos, do efeito de invisibilidade")]
+    public float cloakDuration = 5f;
+
+    // para que inimigos possam checar se o player está invisível
+    public bool IsInvisible { get; private set; }
 
     [Header("Moedas")]
     public int coinCount = 0;
-    public GameObject coinPrefab;   
 
     private Texture2D _coinTex;
 
@@ -189,14 +203,6 @@ public class GameManager : MonoBehaviour
                         slotImg.sprite = emptySlotSprite;
                     }
                 }
-            }
-
-            // extrai o texture2D do sprite da moeda para usar no OnGUI
-            if (coinPrefab != null)
-            {
-                var sr = coinPrefab.GetComponent<SpriteRenderer>();
-                if (sr != null && sr.sprite != null)
-                    _coinTex = sr.sprite.texture;
             }
         }
         else
@@ -523,6 +529,32 @@ public class GameManager : MonoBehaviour
         UpdateHeartsUI();
     }
 
+    private IEnumerator StopTimeCoroutine()
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(brokenWatchDuration);
+        Time.timeScale = 1f;
+    }
+
+    private IEnumerator CloakNyxRoutine()
+    {
+        IsInvisible = true;
+
+        // Ajusta todos os SpriteRenderers do jogador para alpha reduzido
+        var rends = thePlayer.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var r in rends)
+            r.color = new Color(r.color.r, r.color.g, r.color.b, 0.3f);
+
+        // aguarda o término do efeito
+        yield return new WaitForSeconds(cloakDuration);
+
+        // volta à visibilidade normal
+        foreach (var r in rends)
+            r.color = new Color(r.color.r, r.color.g, r.color.b, 1f);
+
+        IsInvisible = false;
+    }
+
     // Usa (consome) o item naquele slot e aplica o efeito.
     public void UseInventoryItem(int slotIndex)
     {
@@ -535,6 +567,20 @@ public class GameManager : MonoBehaviour
                 AddLife(2);   // recupera 2 corações
                 break;
             // case ItemType.Key: … etc
+            case ItemType.Hourglass:
+            // adiciona tempo 
+                currentTime += hourglassBonusTime;
+            // limitar a um máximo:
+                currentTime = Mathf.Min(currentTime, gameTime);
+                Debug.Log($"Ampulheta usada! +{hourglassBonusTime}s");
+                break;
+            case ItemType.BrokenWatch:
+                StartCoroutine(StopTimeCoroutine());
+                break;
+            case ItemType.CloakNyx:
+                // inicia a invisibilidade sem bloquear o jogador
+                StartCoroutine(CloakNyxRoutine());
+                break;
         }
 
         // remove do inventário
